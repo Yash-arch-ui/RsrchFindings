@@ -1,0 +1,2 @@
+read the full paper end to end and build full reearchive findigns properly and build flagship ideas wrt this research paper so that we have an undefeatbale project in ethglobal !!! + we have 5 member with 10 cdoing agent  so dont take care of the timings !!! JUST DRAFT FLAGSHIP IDEAS WITHOUT ANY TIME GAPS 
+STORE EVERYTHIGN IN A NEW MD FILE ; EACH RESEARCH PAPER WITH A NEW MD FILE 
