@@ -27,4 +27,4 @@ Research findings and hackathon ideation for perpetual futures and cryptocurrenc
 - **TailMark** for mark-quality and liquidation-tail severity.
 - **TierBridge** for execution-aware CEX-DEX funding arbitrage.
 
-See [the idea lab](perpetuals/08-hackathon-idea-lab.md) for the full portfolio, scoring, team split, demo script, and judge Q&A. See [clean-sweep flagship ideas](perpetuals/09-flagship-ideas-clean-sweep.md) for the Perp Risk Bureau concept: PerpScore, Perp VIX, Perp Forge, and PerpShield.
+See [the idea lab](perpetuals/08-hackathon-idea-lab.md) for the full portfolio, scoring, team split, demo script, and judge Q&A. See [clean-sweep flagship ideas](perpetuals/09-flagship-ideas-clean-sweep.md) for the Perp Risk Bureau concept: PerpScore, Perp VIX, Perp Forge, and PerpShield. See [crazy flagship ideas](perpetuals/10-flagship-ideas-crazy-sweep.md) for the expanded Perp Safety Grid slate: Perp Nervous System, Perp Court, Perp OS, Perp CDX, Perp Genome, Perp Markets, Perp Twin, Perp Safe, Perp Constitution, and Perp Passport, with full workflows and cons for each.
