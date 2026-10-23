@@ -38,7 +38,7 @@ Build **Perp Forge 5.0** as the core platform, launch one flagship perp generate
 
 This combines the technical depth of Paper 1, the market signal and risk framework of Paper 2, the survival-aware hedging of Paper 3, the mechanism-design insight of Paper 4, the cross-venue execution realism of Paper 5, the testability discipline of Paper 6, and the loss-severity realism of Paper 7. The narrative is: **design the payoff, anchor the price, calibrate the funding, prove the bound is testable, keep the hedge alive, execute the trade, and price the hidden liquidation tail.**
 
-See [08-hackathon-idea-lab.md](08-hackathon-idea-lab.md) for the full idea set, Wave 2/3/4/5 additions, scoring matrix, team split for five humans and ten coding agents, four-act demo, judge Q&A, and kill criteria.
+See [08-hackathon-idea-lab.md](08-hackathon-idea-lab.md) for the full idea set, Wave 2/3/4/5 additions, scoring matrix, team split, demo, and judge Q&A. See [09-flagship-ideas-clean-sweep.md](09-flagship-ideas-clean-sweep.md) for the three clean-sweep flagship concepts: PerpScore/Perp VIX, Perp Forge with risk certificates and stress bonds, and PerpShield liquidation-tail insurance.
 
 ## Access note on Paper 4
 
