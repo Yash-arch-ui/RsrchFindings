@@ -562,4 +562,4 @@ Direct perpetual tails are more correlated with Coinbase spot tails, which shoul
 - **Paper 2 (He et al.):** provides the no-arbitrage anchor and basis signals. LiquidMesh adds the liquidation and margin dimension that Paper 2 bounds but does not optimise.
 - **Paper 4 (Zhang):** explains why the same funding template produces different effective feedback across assets. LiquidMesh's survival score should consume the effective funding regime, because weak feedback and persistent basis gaps change the liquidation path.
 
-**Full ideation:** See [06-hackathon-idea-lab.md](06-hackathon-idea-lab.md), especially the new Wave 2 sections on LiquidMesh, Funding DNA, and the unified Perp Forge risk stack.
+**Full ideation:** See [08-hackathon-idea-lab.md](08-hackathon-idea-lab.md), especially the new Wave 2 sections on LiquidMesh, Funding DNA, and the unified Perp Forge risk stack.

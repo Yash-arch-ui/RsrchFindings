@@ -665,4 +665,4 @@ But the paper's own Table 6 shows significant Hyperliquid-to-Binance causality f
 - **Paper 4 (Zhang):** gives effective funding and stability. TierBridge should use Funding DNA to avoid routes where the nominal spread is not delivered.
 - **Synthesis:** Paper 1 designs; Paper 2 anchors; Paper 3 survives; Paper 4 calibrates; Paper 5 executes.
 
-**Full ideation:** See [06-hackathon-idea-lab.md](06-hackathon-idea-lab.md), especially the new Wave 3 sections on TierBridge, the Tier Oracle, reversal hazard, and the Perp Forge 3.0 stack.
+**Full ideation:** See [08-hackathon-idea-lab.md](08-hackathon-idea-lab.md), especially the new Wave 3 sections on TierBridge, the Tier Oracle, reversal hazard, and the Perp Forge 3.0 stack.

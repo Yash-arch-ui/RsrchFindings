@@ -322,4 +322,4 @@ The original "Payoff Forge" was a no-code designer. The evolved idea is a compil
 
 **Judging alignment:** High technical depth, new category, and a demo that ends with a live novel perp.
 
-**Full ideation:** See [06-hackathon-idea-lab.md](06-hackathon-idea-lab.md), especially the Perp Forge, Slashing Perp, Prediction Perp, Shiller Perp, LP Perp, and Correlation Perp sections, plus the Wave 2 Perp Forge 2.0 stack.
+**Full ideation:** See [08-hackathon-idea-lab.md](08-hackathon-idea-lab.md), especially the Perp Forge, Slashing Perp, Prediction Perp, Shiller Perp, LP Perp, and Correlation Perp sections, plus the Wave 2 Perp Forge 2.0 stack.

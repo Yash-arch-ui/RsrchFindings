@@ -652,4 +652,4 @@ The original "Basis Radar" was a clamp-aware scanner. The evolved idea is a thre
 
 **Judging alignment:** High demoability, strong data/DeFi/AI narrative, and a credible research foundation. The oracle and copilot raise the ceiling beyond a dashboard.
 
-**Full ideation:** See [06-hackathon-idea-lab.md](06-hackathon-idea-lab.md), especially the Basis Mesh, Basis Oracle, Perp Sim, Agentic Copilot, and Funding Firewall sections, plus the Wave 2 Funding DNA and Cascade Sim additions.
+**Full ideation:** See [08-hackathon-idea-lab.md](08-hackathon-idea-lab.md), especially the Basis Mesh, Basis Oracle, Perp Sim, Agentic Copilot, and Funding Firewall sections, plus the Wave 2 Funding DNA and Cascade Sim additions.

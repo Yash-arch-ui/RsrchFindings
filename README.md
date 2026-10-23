@@ -13,14 +13,18 @@ Research findings and hackathon ideation for perpetual futures and cryptocurrenc
 3. *Hedging with Automatic Liquidation and Leverage Selection on Bitcoin Futures* (Alexander, Deng, Zou, 2023)
 4. *A Shared Template Without Shared Feedback: Funding Rates in Cryptocurrency Perpetual Futures* (He, Wang, Zhang, 2026)
 5. *The Two-Tiered Structure of Cryptocurrency Funding Rate Markets* (Zhivkov, 2026)
+6. *Funding Timing and No-Arbitrage Bounds in Decentralized Perpetual Markets* (Erez, Smirnov, 2026)
+7. *Delayed Marks, Funding Memory, and Forecasting Liquidation-Tail Risk in Crypto Perpetual Futures* (Pindza, Mashele, 2026)
 
 ## Flagship direction
 
-**Perp Forge 3.0** — a compiler and launchpad for new perpetuals, with:
+**Perp Forge 5.0** — a compiler and launchpad for new perpetuals, with:
 
 - **Basis Mesh** for the no-arbitrage band and basis signal.
 - **Funding DNA** for effective-funding calibration.
+- **Clockwork** for funding-timing and no-arbitrage testability.
 - **LiquidMesh** for liquidation-aware hedging.
+- **TailMark** for mark-quality and liquidation-tail severity.
 - **TierBridge** for execution-aware CEX-DEX funding arbitrage.
 
-See [the idea lab](perpetuals/06-hackathon-idea-lab.md) for the full portfolio, scoring, team split, demo script, and judge Q&A.
+See [the idea lab](perpetuals/08-hackathon-idea-lab.md) for the full portfolio, scoring, team split, demo script, and judge Q&A.

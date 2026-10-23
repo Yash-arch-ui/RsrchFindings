@@ -435,4 +435,4 @@ Exchanges and perp DEXs should calibrate funding to the **effective feedback** t
 - **Paper 3 (Alexander et al.):** gives the liquidation-aware hedge. Funding DNA adds the funding-feedback channel that can weaken or amplify the hedge's survival.
 - **Synthesis:** Paper 1 designs the contract; Paper 2 prices the basis; Paper 3 keeps the hedge alive; Paper 4 calibrates the control system that connects them.
 
-**Full ideation:** See [06-hackathon-idea-lab.md](06-hackathon-idea-lab.md), especially the new Wave 2 sections on Funding DNA, LiquidMesh, and the unified Perp Forge risk stack.
+**Full ideation:** See [08-hackathon-idea-lab.md](08-hackathon-idea-lab.md), especially the new Wave 2 sections on Funding DNA, LiquidMesh, and the unified Perp Forge risk stack.

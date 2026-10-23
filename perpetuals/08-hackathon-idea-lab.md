@@ -1,6 +1,6 @@
 # Hackathon Idea Lab
 
-Deep ideation built from the five perpetuals papers. The goal is not to list generic DeFi ideas. The goal is to find primitives that the math makes possible, that appear unbuilt or underexplored, and that can be demonstrated in a way judges remember. Sections 1-12 were built from Papers 1 and 2. Sections 13-17 add the liquidation and funding-feedback layer from Papers 3 and 4. Sections 18-22 add the cross-venue execution and two-tier market layer from Paper 5 and supersede the earlier final recommendations.
+Deep ideation built from the seven perpetuals papers. The goal is not to list generic DeFi ideas. The goal is to find primitives that the math makes possible, that appear unbuilt or underexplored, and that can be demonstrated in a way judges remember. Sections 1-12 were built from Papers 1 and 2. Sections 13-17 add the liquidation and funding-feedback layer from Papers 3 and 4. Sections 18-22 add the cross-venue execution and two-tier market layer from Paper 5. Sections 23-27 add the funding-timing and no-arbitrage-testability layer from Paper 6. Sections 28-32 add the mark-latency and liquidation-tail layer from Paper 7 and supersede the earlier final recommendations.
 
 Companion files:
 
@@ -9,6 +9,8 @@ Companion files:
 - [03-alexander-2023-hedging-liquidation-leverage.md](03-alexander-2023-hedging-liquidation-leverage.md)
 - [04-zhang-2026-shared-template-funding.md](04-zhang-2026-shared-template-funding.md)
 - [05-zhivkov-2026-two-tiered-funding-markets.md](05-zhivkov-2026-two-tiered-funding-markets.md)
+- [06-erez-2026-funding-timing-bounds.md](06-erez-2026-funding-timing-bounds.md)
+- [07-pindza-2026-delayed-marks-liquidation-tail.md](07-pindza-2026-delayed-marks-liquidation-tail.md)
 
 ## 0. First principles extracted from the papers
 
@@ -39,8 +41,23 @@ Companion files:
 | Spread reversal and forced-exit risk | Paper 5, Section 4.7 | Reversal-hazard model; dynamic exit thresholds |
 | Duration plus spread as the profitability condition | Paper 5, Section 5.2 | Trade selection; break-even time |
 | 8h normalization across funding intervals | Paper 5, Section 3.1.2 | Cross-venue comparability; basis index |
+| Funding observable at entry vs forward-looking | Paper 6, Theorem 5.2 and Remark 5.3 | Funding-timing oracle; bound testability |
+| Guaranteed funding income `g^-`, `g^+` | Paper 6, Definition 5.1 | Only guaranteed funding enters the no-arbitrage bound |
+| Drift observable-funding extension | Paper 6, Corollary 6.6 | Realized funding tightens the band even when the cap does not bind |
+| dYdX cap `eta_8h = 6(IMF - MMF)` | Paper 6, Section 3.4 | Margin-linked caps can be too wide to bind |
+| Clamped-regime testability | Paper 6, Propositions 6.5 and 7.7 | Bound is informative only when funding is guaranteed or the cap binds |
+| Out-of-band exits and reversion | Paper 6, Sections 8.3 and 8.7 | Band-exit scanner; reversion diagnostic |
+| Gamma calibration and sensitivity | Paper 6, Section 8.6 | Empirical band width; model-risk disclosure |
+| Cap-binding risk | Paper 6, Sections 9.3-9.4 | Protocol design auditor; vacuous-bound flag |
+| Mark delay and stale-mark error | Paper 7, Section 3.1 and Lemma 1 | Mark-quality oracle; hidden-loss forecast |
+| Fixed-delay catch-up overshoot | Paper 7, Theorem 1 | Liquidation-tail severity; bad-debt probability |
+| Latency-margin ratio `sigma sqrt(delta)/m` | Paper 7, Theorem 1 and Corollary 1 | Dynamic margin; venue risk score |
+| Funding memory `T^{2H+2}` | Paper 7, Proposition 2 | Collateral-drain stress; crowded-regime premium |
+| TWAP crossing-conditioned overshoot | Paper 7, Theorem 2 and Corollary 3 | Mark-design audit; 1.6x fixed-delay penalty |
+| Depth and average execution concession | Paper 7, Section 3.3 and Proposition 3 | Depth-aware liquidation loss |
+| Dynamic maintenance margin | Paper 7, Equation (22) | Margin recommendation engine |
 
-The core insight for ideation: **Paper 1 is a factory for new payoffs. Paper 2 is a factory for new market signals and risk anchors. Paper 3 is a factory for survival-aware risk controls. Paper 4 is a factory for effective-feedback diagnostics and rule calibration. Paper 5 is a factory for cross-venue execution and market-structure signals.** The best hackathon idea combines a payoff from Paper 1, an anchor from Paper 2, a survival policy from Paper 3, a feedback calibration from Paper 4, and an execution router from Paper 5.
+The core insight for ideation: **Paper 1 is a factory for new payoffs. Paper 2 is a factory for new market signals and risk anchors. Paper 3 is a factory for survival-aware risk controls. Paper 4 is a factory for effective-feedback diagnostics and rule calibration. Paper 5 is a factory for cross-venue execution and market-structure signals. Paper 6 is a factory for funding-timing and no-arbitrage-testability diagnostics. Paper 7 is a factory for mark-latency and liquidation-tail severity.** The best hackathon idea combines a payoff from Paper 1, an anchor from Paper 2, a survival policy from Paper 3, a feedback calibration from Paper 4, an execution router from Paper 5, a testability verdict from Paper 6, and a mark-quality/tail forecast from Paper 7.
 
 ## 1. Evaluation rubric
 
@@ -1482,3 +1499,595 @@ If the team can support one more agent, add **Agent 11: execution sandbox and CE
 - How do you aggregate hazard, survival, funding, and basis signals into one risk score?
 - How do you prevent an agent from over-trusting a high gross spread?
 - How do you make the router robust to venue outages and liquidation cascades?
+
+## 23. Wave 4: funding timing and no-arbitrage testability
+
+Paper 6 adds the enforcement layer. Papers 1-5 ask what to design, how to price it, how to survive, how to calibrate funding, and how to execute. Paper 6 asks a sharper question: **is the no-arbitrage restriction actually testable?** The answer depends on whether funding is known at trade entry. If it is, realized funding enters the bound. If it is forward-looking, only a guaranteed cap or floor enters, and the cap must bind for the theory to have empirical content. This is a new product axis: a **testability oracle** and a **funding-rule auditor**.
+
+### 23.1 Clockwork: funding-timing oracle and bound engine
+
+**Thesis.** Clockwork classifies every perp's funding as observable-at-entry or forward-looking, publishes a no-arbitrage band only when the guaranteed funding term is valid, and tells protocol designers whether their cap actually binds.
+
+**Paper foundation.** Paper 6, Theorem 5.2, Corollary 6.6, Proposition 7.7, and Sections 8-9. The Drift vs dYdX contrast is the core demo.
+
+**What appears never made.** Funding-rate oracles exist. A **testability oracle** that publishes `FundingDeterminism`, `BoundStatus`, `CapBindingRisk`, and `BandExit` is rare. Most products assume the bound is testable; this one checks.
+
+**Why it could work.** It is a crisp, technical, and visually clear story: the same theory is informative on Drift and vacuous on dYdX because of a protocol design choice. It gives judges a "before/after" design fix.
+
+**Mechanism and oracle design.**
+1. Parse the funding rule: interval, cap, floor, aggregation, oracle source, settlement timing.
+2. Classify timing: observable at entry vs forward-looking.
+3. Compute the guaranteed funding term `g^-`/`g^+`; if none, mark the bound vacuous.
+4. Compute `L`/`U`, `Gamma`, proxy error, and cap-binding risk.
+5. Publish `FundingDeterminism`, `BoundStatus`, `CapBindingRisk`, `BandExit`, and `ProxyError`.
+6. Audit the design: if forward-looking and cap-binding risk is near zero, recommend decoupling the cap from margin parameters.
+
+**Build architecture.** Rule parser; timing classifier; bound engine; `Gamma` calibrator; cap-binding model; band-exit scanner; `FundingTimingOracle.sol`; `BoundOracle.sol`; `CapRiskOracle.sol`; `RuleRegistry.sol`; dashboard; simulator.
+
+**Demo moment.** Side-by-side Drift and dYdX. Drift: cap never binds, but `FundingDeterminism = observable`, `BoundStatus = valid`, out-of-band 3-5%, reversion positive. dYdX: `FundingDeterminism = forward-looking`, `BoundStatus = vacuous`, `CapBindingRisk ~ 0`, zero testable exits. The auditor recommends a tighter cap; the simulator shows the clamp appearing and the bound becoming testable.
+
+**Moat.** The cross-protocol dataset, the timing classifier, the bound engine, the cap-binding model, and the design auditor.
+
+**Risks.** Proxy error, `Gamma` sensitivity, protocol changes, and data quality. Publish uncertainty and never claim model-free bounds.
+
+**Score.** Novelty 5, technical 5, demo 4, feasibility 4, judge 5, moat 5. Total 28.
+
+### 23.2 Funding Timing Oracle
+
+**Thesis.** A standalone oracle that publishes whether a perp's next funding transfer is known at entry, forward-looking, or partially guaranteed. Consumers can use it to decide whether a basis trade is theoretically grounded or just a directional bet.
+
+**Paper foundation.** Paper 6, Theorem 5.2 and Remark 5.3; Drift and dYdX as the two canonical cases.
+
+**What appears never made.** Oracles publish prices and funding rates. An oracle that publishes **funding timing** and **guaranteed funding** is rare.
+
+**Why it could work.** It is a small, composable primitive. Perp DEXs, vaults, and routers can consume it without rebuilding the theory.
+
+**Mechanism and oracle design.** Maintain a registry of protocol funding rules; classify each as observable, forward-looking, or hybrid; publish a determinism score and the guaranteed component. Update on governance changes.
+
+**Build architecture.** Rule registry; classifier; `FundingTimingOracle.sol`; admin/governance; consumer demo.
+
+**Demo moment.** A vault queries the oracle before entering a basis trade. The oracle says "forward-looking, cap-binding risk 2%, bound vacuous" and the vault rejects the trade. Then it queries Drift and gets "observable, bound valid" and proceeds.
+
+**Moat.** Registry coverage and methodology.
+
+**Risks.** Governance changes and classification errors. Use a dispute window.
+
+**Score.** Novelty 4, technical 4, demo 3, feasibility 5, judge 4, moat 5. Total 25.
+
+### 23.3 Cap-Binding Auditor
+
+**Thesis.** A tool that estimates whether a perp's funding cap will ever bind in normal or stressed markets, and recommends a cap that binds when needed without destabilizing normal trading.
+
+**Paper foundation.** Paper 6, Sections 9.3-9.5. dYdX's caps are 60-150 bps/h and never bind; even a tenfold tighter cap has zero clamped observations.
+
+**What appears never made.** Risk teams monitor cap levels. A public auditor that maps cap width to testability, stress behavior, and design trade-offs is rare.
+
+**Why it could work.** It is a concrete deliverable for perp DEXs. It turns a paper result into a parameter recommendation.
+
+**Mechanism and oracle design.** Ingest historical funding, volatility, and stress episodes. Simulate cap-binding frequency under alternative caps. Score testability, tracking error, and tail risk. Recommend a cap and a decoupling policy.
+
+**Build architecture.** Data pipeline; stress library; cap simulator; report generator; dashboard.
+
+**Demo moment.** Load dYdX-style parameters. The auditor shows zero clamped observations across 2025 and even at 10x tighter. Move to a Drift-style tier cap; the clamp appears and the band becomes testable. Show the trade-off in tracking error and stress behavior.
+
+**Moat.** Stress library and calibration.
+
+**Risks.** Overfitting and regime change. Use out-of-sample stress tests.
+
+**Score.** Novelty 4, technical 4, demo 4, feasibility 5, judge 5, moat 4. Total 26.
+
+### 23.4 Bound Vacuum Detector
+
+**Thesis.** A protocol risk primitive that flags when a no-arbitrage bound is technically valid but empirically empty. This is a new kind of risk: not price risk, but **model risk**.
+
+**Paper foundation.** Paper 6's central negative result: dYdX's bound is valid but uninformative because the cap never binds.
+
+**What appears never made.** Audits check code and collateral. A "bound vacuum" audit checks whether the economic mechanism has teeth.
+
+**Why it could work.** It is a strong risk/security narrative and a natural oracle for judges who care about mechanism design.
+
+**Mechanism and oracle design.** Consume `FundingTimingOracle` and `CapRiskOracle`; compute a `BoundTeeth` score; flag vacuous bounds; require a design review before listing.
+
+**Build architecture.** `BoundVacuumOracle.sol`; risk dashboard; listing checklist; report export.
+
+**Demo moment.** A perp DEX lists a new market with a wide margin-linked cap. The detector flags `BoundTeeth = 0.02` and blocks the listing in a mock governance flow. The team tightens the cap and the score rises.
+
+**Moat.** Methodology and integration into listing workflows.
+
+**Risks.** False positives and governance resistance.
+
+**Score.** Novelty 5, technical 4, demo 3, feasibility 5, judge 4, moat 4. Total 25.
+
+### 23.5 Band-Exit Scanner and Reversion Diagnostic
+
+**Thesis.** Detect out-of-band observations on venues with guaranteed funding, estimate reversion probability, and separate statistical signal from executable profit.
+
+**Paper foundation.** Paper 6, Sections 8.3-8.7. Drift out-of-band rates 3-5%, mean durations 5-6h, reversion positive after costs but not scalable.
+
+**What appears never made.** Basis scanners exist. A scanner that only emits signals when the bound is testable, and reports proxy error and cost-adjusted reversion, is rare.
+
+**Why it could work.** It is the trading front-end for Clockwork and a natural consumer of the oracles.
+
+**Mechanism and oracle design.** Compute band, proxy error, and out-of-band distance; estimate reversion with a hazard model; subtract costs; publish a signal with confidence and a "not executable" flag when appropriate.
+
+**Build architecture.** Scanner; hazard model; cost engine; alerting; dashboard; API.
+
+**Demo moment.** A Drift band exit appears. The scanner shows the proxy-error threshold, the reversion probability, and the net-of-cost expected value. It rejects a large but low-confidence exit and accepts a small, high-confidence one.
+
+**Moat.** Calibration and track record.
+
+**Risks.** Overfitting and proxy error. Use walk-forward validation.
+
+**Score.** Novelty 4, technical 5, demo 4, feasibility 4, judge 5, moat 4. Total 26.
+
+### 23.6 Funding-Rule Testability Simulator
+
+**Thesis.** A simulator that lets a protocol compare funding rules on testability, cap-binding, tracking error, and stress behavior before launch.
+
+**Paper foundation.** Paper 6's bounds, `Gamma` sensitivity, and cap-binding analysis; Paper 4's effective feedback.
+
+**What appears never made.** Perp simulators exist. A simulator with a **testability score** and a **bound-validity verdict** is rare.
+
+**Why it could work.** It is a developer tool and a strong visual: change the cap and watch the bound go from vacuous to testable.
+
+**Mechanism and oracle design.** Inputs: funding rule, cap, oracle, market data, stress scenarios. Outputs: clamp frequency, bound width, out-of-band rate, reversion, tracking error, and a testability score.
+
+**Build architecture.** Simulation engine; scenario library; web UI; report export; onchain attestation of results.
+
+**Demo moment.** Start with a dYdX-style rule: bound vacuous, zero clamps. Drag the cap down; the clamp frequency rises, the band tightens, and the bound becomes testable. Show the cost in tracking error and stress behavior.
+
+**Moat.** Scenario library and calibration.
+
+**Risks.** Fidelity. Label it a research tool.
+
+**Score.** Novelty 4, technical 5, demo 5, feasibility 3, judge 5, moat 4. Total 26.
+
+### 23.7 Perp Forge 4.0: design, price, calibrate, survive, execute, test
+
+**Thesis.** The full stack, now with a testability layer. Forge designs the payoff; Basis Mesh anchors the price; Funding DNA calibrates the feedback; Clockwork checks whether the bound is testable; LiquidMesh keeps the hedge alive; TierBridge executes.
+
+**Paper foundation.** All six papers.
+
+**What appears never made.** A compiler that emits a market spec plus a **testability verdict** and a **cap-binding audit** is rare. It closes the loop from theory to enforceable design.
+
+**Why it could work.** It is the complete lifecycle story. Each module is independently demoable, and the testability verdict is a unique differentiator.
+
+**Mechanism and oracle design.** Forge emits:
+1. Payoff and replication.
+2. Funding and discount formulas.
+3. Basis band and basis index.
+4. Effective-feedback calibration.
+5. Funding-timing classification and bound testability.
+6. Cap-binding audit and recommended cap.
+7. Liquidation-aware sizing and survival score.
+8. Cross-venue route and exit policy.
+9. Oracle spec, stress report, generated contracts, and tests.
+
+**Build architecture.** Payoff DSL; symbolic engine; funding compiler; basis oracle; funding-DNA engine; clockwork engine; liquid-mesh engine; tier-bridge router; code generator; simulator; UI; testnet deployment.
+
+**Demo moment.** Type a payoff. Forge emits the full market spec. Clockwork flags the funding bound as vacuous and recommends a cap change. The team applies it; the bound becomes testable. Launch the perp. Shock it. The funding converges, the hedge survives, and TierBridge exits the cross-venue leg before the reversal. End with the platform vision.
+
+**Moat.** The compiler, the six oracles, the dataset, and the integrations.
+
+**Risks.** Scope and safety. Constrain the DSL, generate auditable code, keep a human review gate.
+
+**Score.** Novelty 5, technical 5, demo 5, feasibility 4, judge 5, moat 5. Total 29-30.
+
+## 24. Wave 4 scoring matrix
+
+| Idea | Papers | Novelty | Tech | Demo | Feasibility | Judge | Moat | Total |
+|---|---|---:|---:|---:|---:|---:|---:|---:|
+| Perp Forge 4.0 | 1-6 | 5 | 5 | 5 | 4 | 5 | 5 | 29-30 |
+| Clockwork | 6 | 5 | 5 | 4 | 4 | 5 | 5 | 28 |
+| Cap-Binding Auditor | 6 | 4 | 4 | 4 | 5 | 5 | 4 | 26 |
+| Band-Exit Scanner | 6 | 4 | 5 | 4 | 4 | 5 | 4 | 26 |
+| Funding-Rule Simulator | 4+6 | 4 | 5 | 5 | 3 | 5 | 4 | 26 |
+| Funding Timing Oracle | 6 | 4 | 4 | 3 | 5 | 4 | 5 | 25 |
+| Bound Vacuum Detector | 6 | 5 | 4 | 3 | 5 | 4 | 4 | 25 |
+
+## 25. Recommended build portfolio 4.0 (supersedes section 20)
+
+### 25.1 The stack
+
+**Core platform:** Perp Forge 4.0.
+
+**Flagship instrument:** a Slashing Perp or Prediction Perp generated by Forge, launched with a liquidation-aware risk vault.
+
+**Risk layer:** LiquidMesh.
+
+**Calibration layer:** Funding DNA.
+
+**Execution layer:** TierBridge.
+
+**Testability layer:** Clockwork.
+
+**Trust layer:** Basis Mesh / Tier Oracle.
+
+**Narrative:** "We built the full lifecycle for a perpetual market: design the payoff, anchor the price, calibrate the funding, prove the bound is testable, keep the hedge alive, and execute the trade."
+
+### 25.2 Why this beats the 3.0 portfolio
+
+- It adds the question judges rarely hear: "Is your no-arbitrage bound actually testable?"
+- It turns a subtle theory result into a visible product: Drift vs dYdX, valid vs vacuous.
+- It gives the demo a third act: not just execution, but **design enforcement**.
+- It creates a new oracle category: funding timing and bound testability.
+- It makes the platform credible to mechanism-design and risk judges, not only traders.
+
+### 25.3 Team split update
+
+The 3.0 split still holds. Add:
+
+**Human 1 (quant/math):** owns the generic bound, Drift/dYdX applications, `Gamma` calibration, and the testability verdict.
+
+**Human 4 (data/oracle):** owns on-chain funding records, premium samples, cap/margin parameters, and the Clockwork oracle.
+
+**Agent 8 (docs/research):** owns the protocol rule registry and the bound derivations.
+
+**Agent 9 (integration):** owns the Clockwork consumer demo and the listing checklist.
+
+If an extra agent is available, add **Agent 11: cap-binding stress simulator**.
+
+### 25.4 Build order update
+
+1. Payoff DSL and funding engine (Paper 1).
+2. Basis band and basis index (Paper 2).
+3. GEV tail and liquidation model (Paper 3).
+4. LiquidMesh optimiser and survival oracle (Paper 3).
+5. Funding DNA estimator and rule compiler (Paper 4).
+6. Cross-venue normalizer and TierBridge (Paper 5).
+7. Funding-timing classifier and bound engine (Paper 6).
+8. Cap-binding auditor and bound-vacuum detector (Paper 6).
+9. Solidity oracles and perp engine.
+10. Flagship perp plus risk vault.
+11. Simulators and stress reports.
+12. Demo polish and judge narrative.
+
+### 25.5 Three-act demo 4.0
+
+**Act 1: Three failures.** A treasury hedge is liquidated. A naive CEX-DEX spread loses after costs. A DeFi perp's no-arbitrage bound is technically valid but empirically vacuous because the cap never binds. The judge sees the three ways perp design fails: the hedge dies, the arbitrage is fake, and the theory is untestable.
+
+**Act 2: The stack.** Forge designs the perp. Basis Mesh anchors it. Funding DNA calibrates the funding. Clockwork classifies the funding timing and flags the bound as vacuous. The team tightens the cap; the bound becomes testable. LiquidMesh sizes the hedge. TierBridge finds a CEX-led dislocation and rejects three routes before accepting one.
+
+**Act 3: The execution.** Shock the market. The funding converges, the hedge survives, and TierBridge exits before the spread flips. The oracles update. End with the platform vision: the full lifecycle, from payoff to enforceable execution.
+
+### 25.6 Judge Q&A additions
+
+**"What is the new idea here?"** Funding timing as a design primitive. The same no-arbitrage theory is testable on Drift and vacuous on dYdX because funding is observable at entry on one and forward-looking on the other.
+
+**"Why should a judge care?"** Because most perp DEXs copy a funding rule without checking whether its no-arbitrage bound has teeth. Clockwork audits that before launch.
+
+**"Is this just an academic result?"** No. It produces a concrete design recommendation: decouple the funding cap from margin parameters if you want testable bounds.
+
+**"How do you avoid overclaiming?"** The bound is published only when the guaranteed funding term is valid; `Gamma` is calibrated with sensitivity; the reversion test is labelled a diagnostic.
+
+**"What is the one-sentence pitch?"** "We built the full lifecycle for perpetual markets, including the test that tells you whether your no-arbitrage bound is real."
+
+### 25.7 Updated kill criteria
+
+- If the bound engine is too complex, ship Clockwork as a timing classifier and cap-binding dashboard.
+- If the cap-binding model is too noisy, publish a simple clamp-frequency table and label it descriptive.
+- If the flagship perp oracle is unreliable, use a crypto-native event.
+- If the scope is too large, keep Forge + Clockwork + TierBridge and cut Funding DNA / Cascade Sim.
+- Never claim risk-free arbitrage, model-free bounds, guaranteed survival, or production readiness.
+
+## 26. Why the 4.0 stack can win ETHGlobal
+
+1. **It has a complete lifecycle story.** Design, price, calibrate, test, survive, execute.
+2. **It has three crises.** A liquidation, a fake arbitrage, and a vacuous bound.
+3. **It has six oracles.** Basis, funding, survival, hazard, market structure, and testability.
+4. **It is built on a negative result.** Clockwork's willingness to say "this bound is vacuous" is a credibility signal.
+5. **It fits every relevant track.** Derivatives, oracles, risk, AI agents, data, Ethereum/L2, and mechanism design.
+6. **It is honest.** `Gamma` sensitivity, proxy error, and non-executable diagnostics are disclosed.
+7. **It is extensible.** Every new protocol, venue, or funding rule improves the registry and the oracles.
+
+## 27. Open questions after Paper 6
+
+- How do you derive `Gamma` from a multi-period ergodic argument instead of an empirical percentile?
+- How do you classify hybrid funding rules that are partially observable at entry?
+- How do you measure cap-binding risk out of sample across regimes?
+- How do you handle stochastic `N_k` in dYdX-style funding?
+- How do you design a cap that binds in stress without destabilizing normal markets?
+- How do you audit a funding rule when the protocol can change it by governance?
+- How do you aggregate testability, survival, funding, and basis signals into one risk score?
+- How do you prevent a bound oracle from becoming a false sense of security?
+- How do you apply the framework to isolated-margin markets and low-liquidity assets?
+- How do you make the testability verdict robust to proxy error and data gaps?
+
+## 28. Wave 5: mark latency and liquidation-tail severity
+
+Paper 7 adds the loss-severity layer. Papers 1-6 ask what to design, how to price it, how to survive, how to calibrate funding, how to execute, and whether the bound is testable. Paper 7 asks: **when the mark finally detects the breach, how much loss is hidden?** The answer depends on mark delay or smoothing, funding memory, and executable depth. This is a new product axis: a **mark-quality oracle** and a **liquidation-tail forecast**.
+
+### 28.1 TailMark: liquidation-tail and mark-quality oracle
+
+**Thesis.** TailMark forecasts the joint distribution of a boundary breach and the conditional catch-up loss under a delayed or smoothed mark, then tells venues how to redesign the mark and maintenance schedule to reduce the hidden tail.
+
+**Paper foundation.** Paper 7, Theorems 1 and 2, Corollaries 1-3, and Sections 6-9. The fixed-delay and TWAP results are the core.
+
+**What appears never made.** Liquidation calculators show the liquidation price. A **joint breach-and-severity oracle** that distinguishes fixed delay from TWAP, includes funding memory and depth, and publishes a mark-quality score is rare.
+
+**Why it could work.** The demo is dramatic: a position looks healthy on a 60-minute mark, then a hidden 13.5% bad-debt probability appears; a "safer" TWAP is actually 1.6x worse at the crossing. The design fix is concrete.
+
+**Mechanism and oracle design.**
+1. Ingest venue mark rule, delay, smoothing window, maintenance tiers, funding, depth.
+2. Compute breach probability `Pi(T;m,delta,H,Phi)`.
+3. Compute fixed-delay `E[O]`, `P_bd`, and TWAP crossing-conditioned `E[O_TWAP]`, `P_TWAP_bd`.
+4. Add funding-memory premium and depth concession.
+5. Publish `LiquidationTail`, `BadDebtProb`, `MarkQuality`, `LatencyMarginRatio`, `FundingMemoryPremium`, `DepthConcession`.
+6. Recommend dynamic maintenance margin `m_t` and mark design changes.
+
+**Build architecture.** Position intake; mark model; breach engine; severity engine; funding-memory engine; depth engine; margin engine; `LiquidationTailOracle.sol`; `MarkQualityOracle.sol`; `MarginAdvisor.sol`; `DepthRiskOracle.sol`; dashboard; simulator.
+
+**Demo moment.** 20x SOL: 1-minute delay `P_bd ~ 0`, 60-minute fixed delay 0.135, 60-minute TWAP mechanism 0.164. The naive variance heuristic says TWAP is safer; TailMark shows the opposite. Recommend dynamic margin and bounded delay; re-run and hit the bad-debt budget. Publish the new mark-quality score onchain.
+
+**Moat.** Calibrated mark-latency data, stopping-time formulas, depth integration, funding memory, and oracle integrations.
+
+**Risks.** Public-data limitations, Gaussian benchmark, TWAP approximation, short sample. Publish uncertainty and label model-consistent forecasts.
+
+**Score.** Novelty 5, technical 5, demo 5, feasibility 4, judge 5, moat 5. Total 29.
+
+### 28.2 Mark Quality Oracle
+
+**Thesis.** A standalone oracle that rates a venue's mark construction on liquidation-time safety, not just manipulation resistance. It publishes the mark type, delay, window, crossing-conditioned overshoot, and a quality score.
+
+**Paper foundation.** Paper 7, Theorem 2 and Corollary 3; Appendix A.1 on kernels.
+
+**What appears never made.** Oracles publish prices. A mark-quality oracle that compares fixed delay, TWAP, exponential, and VWAP on liquidation-time loss is rare.
+
+**Why it could work.** It is a composable primitive for perp DEXs, insurers, and regulators. It also creates a public ranking of venues.
+
+**Mechanism and oracle design.** Registry of mark rules; calibrate `delta`, kernel, `sigma`, `m`; compute fixed-time variance and crossing-conditioned overshoot; publish `MarkQuality` and a disclosure score.
+
+**Build architecture.** Registry; classifier; `MarkQualityOracle.sol`; dashboard; API.
+
+**Demo moment.** Three venues: fixed delay 30s, TWAP 60min, exponential 60min. The naive ranking by variance says TWAP is safest; Mark Quality ranks fixed delay best at the crossing, TWAP worst for SOL. Show the venue scoreboard.
+
+**Moat.** Registry coverage, methodology, and calibration.
+
+**Risks.** Governance changes and data gaps. Use a dispute window.
+
+**Score.** Novelty 4, technical 4, demo 4, feasibility 5, judge 4, moat 5. Total 26.
+
+### 28.3 Liquidation-Tail Vault and Insurance
+
+**Thesis.** An insurance or risk-transfer vault that prices cover for bad-debt events using the TailMark distribution, with explicit mark-latency and depth assumptions.
+
+**Paper foundation.** Paper 7's `P_bd` and conditional severity; Paper 3's liquidation-aware sizing.
+
+**What appears never made.** Liquidation insurance exists in various forms. A product that prices the **hidden loss after delayed detection** and discloses mark-quality assumptions is rare.
+
+**Why it could work.** It is a concrete yield product with a clear risk premium. It also creates a consumer for the oracle.
+
+**Mechanism and oracle design.** Underwrite a capped bad-debt event; price using `P_bd` and severity distribution; reserve capital for tail scenarios; monitor mark quality and depth; trigger payout on a verified negative-equity event.
+
+**Build architecture.** Vault contract; pricing engine; `LiquidationTailOracle` consumer; claims adapter; risk dashboard.
+
+**Demo moment.** A venue wants cover for 20x SOL liquidations. TailMark prices the premium at the 99th percentile of the severity distribution. A 60-minute mark delay doubles the premium; a TWAP mark raises it further. The venue chooses a bounded-delay mark and the premium falls.
+
+**Moat.** Pricing model, capital, and venue relationships.
+
+**Risks.** Adverse selection, moral hazard, oracle ambiguity, regulation. Keep it a research prototype.
+
+**Score.** Novelty 5, technical 4, demo 4, feasibility 4, judge 5, moat 4. Total 26.
+
+### 28.4 Mark Design Lab
+
+**Thesis.** A simulator and design tool for perp venues: compare fixed delay, TWAP, exponential, and VWAP marks on manipulation cost, fixed-time variance, crossing-conditioned overshoot, and bad-debt tail.
+
+**Paper foundation.** Paper 7, Theorem 2, Appendix A.1, and Section 9's design trade-off.
+
+**What appears never made.** Mark design is usually a protocol-internal decision. A public lab that quantifies the liquidation-time cost of smoothing is rare.
+
+**Why it could work.** It is a developer tool with a strong visual: drag the window and watch the tail change. It also produces a concrete recommendation.
+
+**Mechanism and oracle design.** Inputs: price path, volatility, mark kernel, maintenance, depth. Outputs: fixed-time variance, crossing-conditioned overshoot, `P_bd`, manipulation-cost proxy, and a recommended kernel.
+
+**Build architecture.** Simulation engine; kernel library; scenario library; web UI; report export; onchain attestation.
+
+**Demo moment.** Start with a TWAP because it is "safer." Show the crossing-conditioned overshoot is 1.6x fixed delay and SOL bad debt is higher. Switch to a bounded-delay mark; the tail falls. Show the manipulation-cost trade-off.
+
+**Moat.** Kernel library, calibration, and design reputation.
+
+**Risks.** Fidelity and manipulation-cost modeling. Label it a research tool.
+
+**Score.** Novelty 4, technical 5, demo 5, feasibility 4, judge 5, moat 4. Total 27.
+
+### 28.5 Dynamic Margin Engine
+
+**Thesis.** A margin engine that targets a bad-debt budget using `m_t = m_0 + a_1 sigma + a_2|F| + a_3 sigma sqrt(delta) + a_4 phi'(N)`, with explicit mark-quality and depth inputs.
+
+**Paper foundation.** Paper 7, Equation (22), Corollaries 1-2, and Section 9.
+
+**What appears never made.** Dynamic margin exists in research. A deployed engine that explicitly prices mark delay and depth, and publishes the target bad-debt probability, is rare.
+
+**Why it could work.** It is a concrete risk-control product for perp DEXs. It also makes the trade-off between leverage, latency, and margin legible.
+
+**Mechanism and oracle design.** Inputs: volatility, funding, mark delay, depth, position size. Output: maintenance margin recommendation and a bad-debt budget. Constraints: tiered margin, governance, circuit breakers.
+
+**Build architecture.** `MarginAdvisor.sol`; risk engine; parameter registry; dashboard; governance adapter.
+
+**Demo moment.** A venue targets `P_bd <= 1%`. At 60-minute delay, the engine raises maintenance margin or tightens leverage. The bad-debt budget is met; the cost is lower max leverage. Show the trade-off curve.
+
+**Moat.** Calibration, governance integration, and track record.
+
+**Risks.** Model risk, governance capture, and regime change. Use conservative buffers.
+
+**Score.** Novelty 4, technical 5, demo 4, feasibility 4, judge 5, moat 4. Total 26.
+
+### 28.6 Liquidation-Tail Copilot
+
+**Thesis.** An AI risk copilot that explains why a position's liquidation tail is high: boundary proximity, mark delay, funding drain, or thin depth, and proposes a concrete fix.
+
+**Paper foundation.** Paper 7's decomposition of breach frequency and loss severity; Papers 3-6 for the surrounding risk stack.
+
+**What appears never made.** Risk dashboards show numbers. A copilot that decomposes the tail into mark, funding, and depth channels and recommends a fix is rare.
+
+**Why it could work.** It is an AI narrative with a deterministic engine underneath, and it makes the paper's mechanisms accessible.
+
+**Mechanism and oracle design.** Deterministic engines produce the tail decomposition; the LLM explains and proposes actions, with human approval. No autonomous custody.
+
+**Build architecture.** Tool layer; risk engine; LLM agent; audit log; dashboard.
+
+**Demo moment.** The copilot says: "Your 20x SOL position has a 13.5% bad-debt probability at 60-minute delay, driven by mark latency; funding memory adds 1%, depth adds 3%. Reduce delay to 15 minutes or raise maintenance to 2%." The user applies the fix and the tail falls.
+
+**Moat.** Decomposition logic, guardrails, and UX.
+
+**Risks.** Hallucination. Keep the explanation grounded in deterministic outputs.
+
+**Score.** Novelty 4, technical 4, demo 5, feasibility 4, judge 5, moat 3. Total 25.
+
+### 28.7 Perp Forge 5.0: design, price, calibrate, test, survive, execute, price the tail
+
+**Thesis.** The full stack, now with a mark-latency and liquidation-tail layer. Forge designs; Basis Mesh anchors; Funding DNA calibrates; Clockwork tests; LiquidMesh sizes; TailMark prices the tail; TierBridge executes.
+
+**Paper foundation.** All seven papers.
+
+**What appears never made.** A compiler that emits a market spec plus a **mark-quality score** and a **liquidation-tail distribution** is rare. It closes the loop from design to enforcement to loss severity.
+
+**Why it could work.** It is the complete lifecycle story. Each module is independently demoable, and the tail forecast is the most visceral.
+
+**Mechanism and oracle design.** Forge emits:
+1. Payoff and replication.
+2. Funding and discount formulas.
+3. Basis band and basis index.
+4. Effective-feedback calibration.
+5. Funding-timing classification and bound testability.
+6. Mark design and mark-quality score.
+7. Liquidation-tail distribution and dynamic margin.
+8. Liquidation-aware sizing and survival score.
+9. Cross-venue route and exit policy.
+10. Oracle spec, stress report, generated contracts, and tests.
+
+**Build architecture.** Payoff DSL; symbolic engine; funding compiler; basis oracle; funding-DNA engine; clockwork engine; tail engine; liquid-mesh engine; tier-bridge router; code generator; simulator; UI; testnet deployment.
+
+**Demo moment.** Type a payoff. Forge emits the full market spec. Clockwork flags the funding bound as vacuous; TailMark flags the mark design as a hidden tail. The team fixes the cap and the mark delay. Launch the perp. Shock it. The funding converges, the hedge survives, and TierBridge exits before the reversal. The tail forecast stays below budget. End with the platform vision.
+
+**Moat.** The compiler, the seven oracles, the dataset, and the integrations.
+
+**Risks.** Scope and safety. Constrain the DSL, generate auditable code, keep a human review gate.
+
+**Score.** Novelty 5, technical 5, demo 5, feasibility 4, judge 5, moat 5. Total 29-30.
+
+## 29. Wave 5 scoring matrix
+
+| Idea | Papers | Novelty | Tech | Demo | Feasibility | Judge | Moat | Total |
+|---|---|---:|---:|---:|---:|---:|---:|---:|
+| Perp Forge 5.0 | 1-7 | 5 | 5 | 5 | 4 | 5 | 5 | 29-30 |
+| TailMark | 7 | 5 | 5 | 5 | 4 | 5 | 5 | 29 |
+| Mark Design Lab | 7 | 4 | 5 | 5 | 4 | 5 | 4 | 27 |
+| Mark Quality Oracle | 7 | 4 | 4 | 4 | 5 | 4 | 5 | 26 |
+| Liquidation-Tail Vault | 3+7 | 5 | 4 | 4 | 4 | 5 | 4 | 26 |
+| Dynamic Margin Engine | 7 | 4 | 5 | 4 | 4 | 5 | 4 | 26 |
+| Liquidation-Tail Copilot | 3-7 | 4 | 4 | 5 | 4 | 5 | 3 | 25 |
+
+## 30. Recommended build portfolio 5.0 (supersedes section 25)
+
+### 30.1 The stack
+
+**Core platform:** Perp Forge 5.0.
+
+**Flagship instrument:** a Slashing Perp or Prediction Perp generated by Forge, launched with a liquidation-aware risk vault.
+
+**Risk layer:** LiquidMesh.
+
+**Calibration layer:** Funding DNA.
+
+**Execution layer:** TierBridge.
+
+**Testability layer:** Clockwork.
+
+**Tail layer:** TailMark.
+
+**Trust layer:** Basis Mesh / Tier Oracle.
+
+**Narrative:** "We built the full lifecycle for a perpetual market: design the payoff, anchor the price, calibrate the funding, prove the bound is testable, keep the hedge alive, execute the trade, and price the hidden liquidation tail."
+
+### 30.2 Why this beats the 4.0 portfolio
+
+- It adds the most visceral risk: the loss hidden by the mark.
+- It turns a theoretical stopping-time result into a live oracle and a design fix.
+- It creates a new product category: mark-quality and liquidation-tail insurance.
+- It gives the demo a fourth act: not just execution or testability, but **loss severity**.
+- It connects every paper: design, price, calibrate, test, survive, execute, price the tail.
+
+### 30.3 Team split update
+
+The 4.0 split still holds. Add:
+
+**Human 1 (quant/math):** owns the fixed-delay and TWAP stopping-time formulas, the depth mapping, and the tail decomposition.
+
+**Human 4 (data/oracle):** owns minute prices, funding histories, depth snapshots, and the TailMark oracle.
+
+**Agent 6 (simulator):** owns first-passage and TWAP path simulation.
+
+**Agent 9 (integration):** owns the TailMark consumer demo and the mark-quality scorecard.
+
+If an extra agent is available, add **Agent 11: liquidation-tail insurance pricing**.
+
+### 30.4 Build order update
+
+1. Payoff DSL and funding engine (Paper 1).
+2. Basis band and basis index (Paper 2).
+3. GEV tail and liquidation model (Paper 3).
+4. LiquidMesh optimiser and survival oracle (Paper 3).
+5. Funding DNA estimator and rule compiler (Paper 4).
+6. Cross-venue normalizer and TierBridge (Paper 5).
+7. Funding-timing classifier and bound engine (Paper 6).
+8. Mark-delay/TWAP engine and TailMark oracle (Paper 7).
+9. Dynamic margin engine and depth risk oracle (Paper 7).
+10. Solidity oracles and perp engine.
+11. Flagship perp plus risk vault.
+12. Simulators, stress reports, and demo.
+
+### 30.5 Four-act demo 5.0
+
+**Act 1: Four failures.** A treasury hedge is liquidated. A naive CEX-DEX spread loses after costs. A DeFi perp's no-arbitrage bound is vacuous. A 20x position looks healthy on a delayed mark, then reveals a 13.5% bad-debt probability and a 1.6x TWAP penalty. The judge sees four ways perp design fails.
+
+**Act 2: The stack.** Forge designs the perp. Basis Mesh anchors it. Funding DNA calibrates the funding. Clockwork flags the vacuous bound. TailMark flags the hidden liquidation tail. The team tightens the cap and the mark. LiquidMesh sizes the hedge. TierBridge finds a CEX-led dislocation.
+
+**Act 3: The execution.** Shock the market. The funding converges, the hedge survives, and TierBridge exits before the spread flips. The tail forecast stays within budget. The oracles update.
+
+**Act 4: The proof.** Publish the mark-quality score, liquidation-tail distribution, and bad-debt probability onchain. Show the before/after: hidden tail down, survival up, execution profitable. End with the platform vision.
+
+### 30.6 Judge Q&A additions
+
+**"What is the new idea?"** Mark construction is part of the liquidation stopping rule. The hidden loss is a `sqrt(delta)` overshoot, and smoothing can make it worse at the crossing.
+
+**"Why does this matter?"** Every venue chooses a mark. TailMark tells them the liquidation-time cost of that choice, not just the fixed-time variance.
+
+**"Isn't this just a liquidation calculator?"** No. It forecasts the conditional severity distribution, decomposes it into mark, funding, and depth channels, and recommends a design fix.
+
+**"How do you avoid overclaiming?"** Model-consistent forecasts, uncertainty, TWAP approximation labels, and no claim to observe customer liquidations.
+
+**"What is the one-sentence pitch?"** "We built the full lifecycle for perpetual markets, including the oracle that prices the loss hidden by the mark."
+
+### 30.7 Updated kill criteria
+
+- If the tail engine is too complex, ship TailMark as a mark-quality score and fixed-delay bad-debt calculator.
+- If the TWAP model is too noisy, show the mechanism simulation and label the approximation.
+- If the insurance vault is too risky, keep it as a pricing demo, not a live vault.
+- If the flagship perp oracle is unreliable, use a crypto-native event.
+- If the scope is too large, keep Forge + TailMark + TierBridge and cut Funding DNA / Cascade Sim.
+- Never claim risk-free arbitrage, model-free tail forecasts, guaranteed survival, or production readiness.
+
+## 31. Why the 5.0 stack can win ETHGlobal
+
+1. **It has a complete lifecycle story.** Design, price, calibrate, test, survive, execute, price the tail.
+2. **It has four crises.** A liquidation, a fake arbitrage, a vacuous bound, and a hidden mark tail.
+3. **It has seven oracles.** Basis, funding, survival, hazard, market structure, testability, and liquidation tail.
+4. **It is built on uncomfortable truths.** The "safer" TWAP is worse at the crossing; high leverage raises breach frequency but not conditional bad-debt severity in the benchmark.
+5. **It fits every relevant track.** Derivatives, oracles, risk, AI agents, data, Ethereum/L2, mechanism design, and insurance.
+6. **It is honest.** Every model has a disclosed assumption and a label.
+7. **It is extensible.** Every new venue, mark rule, or depth snapshot improves the oracles.
+
+## 32. Open questions after Paper 7
+
+- How do you estimate mark delay and smoothing empirically when venues do not disclose it?
+- How do you calibrate the tail model with jumps/regime switching instead of a Gaussian core?
+- How do you model insurance-fund and ADL losses after the bad-debt event?
+- How do you price a liquidation-tail vault without adverse selection?
+- How do you set dynamic margins without destabilizing normal trading?
+- How do you handle cross-margin and multi-asset portfolios?
+- How do you model VWAP marks with endogenous volume and depth?
+- How do you aggregate mark-quality, funding, basis, survival, and testability into one risk score?
+- How do you prevent a tail oracle from creating false confidence?
+- How do you audit a venue's mark rule when it can change by governance?
