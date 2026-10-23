@@ -18,6 +18,8 @@ The seven papers describe the same missing layer from seven angles. Perpetual fu
 
 > **"We built the missing safety infrastructure for the $90T perpetual market: a nervous system, a court, and an insurance market."**
 
+> **The 10-second wow.** A judge watches a live cascade index spike before the crash, a lending contract automatically de-risk, a perp design go on trial, a self-tuning market survive the same shock, and an insurance vault pay the hidden liquidation loss. Five things that normally require five separate companies happen in one demo.
+
 ---
 
 ## 1. What this slate adds beyond the earlier files
@@ -48,6 +50,93 @@ The original three modules remain good. This slate is what the team should build
 
 ---
 
+## 2.5 Reality check: what already exists (public web scan, October 2026)
+
+This section exists because "does this already exist?" is the first question a judge asks, and the first question a competitor answers. The scan below is not exhaustive. It is enough to stop the team from making a false "first" claim and to force every idea into a defensible white space.
+
+**Verdict key**
+
+- **RED:** a public product already does this, or does something close enough that the label is not credible.
+- **AMBER:** adjacent products exist, so the idea must be repositioned around a sharper primitive.
+- **GREEN:** no public product was found for the specific combination, but the adjacent category exists.
+
+### What exists today
+
+| Product | What it already does | Why it matters for this slate |
+|---|---|---|
+| [HIP3Radar](https://hip3radar.xyz/) | Independent live risk surveillance for HIP-3 perp markets: oracle integrity, stake health, liquidity depth, governance, uptime; 0-100 score; API, badges, Telegram alerts | PerpScore is not a new idea for Hyperliquid. A cross-venue, perp-specific score must go beyond five venue-quality dimensions into funding feedback, mark latency, and liquidation tail. |
+| [OpenChainBench](https://openchainbench.com/perps) | Live perp DEX leaderboard: volume, open interest, fees, funding, mark price, liquidations, execution cost across 29 venues | Analytics are crowded. The white space is a risk oracle that changes a contract, not another table. |
+| [Hindenrank](https://hindenrank.com/) | 711+ DeFi protocols graded A-F across eight risk dimensions | General DeFi ratings exist. A perp-specific, tail-aware, bondable rating is still different. |
+| [Nexus Mutual Leveraged Liquidation Cover](https://nexusmutual.io/product-index/leveraged-liquidation-cover) | Covers leveraged lending loops against depeg, oracle failure, oracle manipulation, and liquidation failure | Liquidation insurance exists for lending, not for perp venue bad-debt tails or a tranched perp CDS index. |
+| [Rho X / Rho Labs](https://docs.rho.trading/) | Funding-rate futures, aggregated BTC/ETH funding index, funding spread trading, cross-venue funding hedge | "First funding-rate market" is false. Perp Markets must not sell funding-rate trading as new. |
+| [Pendle Boros](https://docs.pendle.finance/boros-docs/Introduction) | Funding-rate markets and spread markets on margin, launched August 2025 | Funding-rate and funding-spread trading is live and crowded. |
+| [Volmex BVIV perp on Hyperliquid](https://www.coindesk.com/markets/2026/09/21/perp-futures-linked-to-bitcoin-vix-debut-on-hyperliquid) | First onchain perpetual on the Bitcoin Volmex Implied Volatility Index, launched September 2026 | "Crypto VIX perp" already exists. A "Perp VIX" must be a plumbing-stress index, not a price-volatility index. |
+| [MetaFlux CDS](https://docs.mtf.exchange/products/cds) | Planned onchain CDS market; explicitly says the design and resolution are unresolved | Onchain CDS is being attempted, but a perp-tail CDX index with a calibrated trigger and tranches is still open. |
+| [Tenderly](https://tenderly.co/) / [Base58 Mirror World](https://base58labs.com/research/the-mirror-world-why-we-moved-beyond-backtesting-1) | High-fidelity blockchain and agent-based digital twins for stress testing | "Digital twin" is not new. A perp-specific twin with a scenario marketplace and an onchain risk score is narrower and still open. |
+| [Web3SOC](https://cantina.xyz/blog/web3soc-the-institutional-due-diligence-standard-for-defi) / [SEAL Certifications](https://radar.securityalliance.org/seal-certifications-auditor-accreditations-protocol-assessments/) | Institutional DeFi maturity and operational-security certifications | Certification exists, but not adversarial perp-mechanism certification with liquidation-tail tests and a bonded verdict. |
+| [zkMe Proof-of-Credit](https://docs.zk.me/hub/what/zkobs/zkcredit), [zkPoC](https://dl.acm.org/doi/pdf/10.1145/3842755), [Qiro x EZKL](https://www.qiro.fi/blogs/qiro-x-ezkl-verifiable-underwriting-for-defi), [Orochi](https://orochi.network/blog/on-chain-credit-verification) | ZK credit scores, income proofs, private underwriting, reusable SBT credentials | Generic ZK credit is crowded. A perp-specific proof of liquidation distance, hedge survival, and venue risk is still open. |
+| Academic systemic-risk work | DeFi Correlation Fragility Indicator, Aggregated Systemic Risk Index, Slippage-at-Risk for perps, October 2025 cascade anatomy, ADL as online learning | A "cascade index" is not academically novel. The product novelty is a real-time onchain alert with a consumer adapter and a financial consequence. |
+| Native venue insurance funds and ADL | Every major perp venue has an insurance fund, socialized loss, and/or ADL | Perp CDX cannot claim to invent liquidation protection. It must be an external, tranched, transferable tail market. |
+
+### Verdict for each flagship idea
+
+| Idea | Closest existing product | Verdict | The defensible white space |
+|---|---|---|---|
+| Perp Nervous System | HIP3Radar, OpenChainBench, academic cascade indices, SaR | AMBER-GREEN | Cross-venue cascade graph + onchain alert + consumer adapter + stress bond; not another scoreboard |
+| Perp Court | Web3SOC, SEAL, smart-contract audits | GREEN | Adversarial perp-mechanism test suite, liquidation-tail evidence, bonded verdict, reusable certificate |
+| Perp OS | Perp launchpads and no-code deployers | GREEN | Self-tuning kernel that co-designs funding, margin, mark, and certificate after launch |
+| Perp CDX | Nexus Leveraged Liquidation Cover, MetaFlux planned CDS, venue insurance funds | AMBER-GREEN | Perp-specific bad-debt trigger, index/tranche structure, capital vault, claims oracle |
+| Perp Genome | Funding-rate research and parameter optimization | GREEN | Evolutionary mechanism-design arena + held-out adversarial fitness + license/royalty market |
+| Perp Markets | Rho X, Pendle Boros, Volmex BVIV | AMBER | Mark-quality futures, liquidation-tail forwards, and a plumbing-stress VIX; not funding-rate trading |
+| Perp Twin | Tenderly, Base58 Mirror World, Greeks.live | AMBER | Perp-specific twin + scenario marketplace + onchain score consumed by a contract |
+| Perp Safe | DEX aggregators and risk dashboards | AMBER | Survival-adjusted routing + pre-trade liquidation firewall + insurance attach |
+| Perp Constitution | SLA/bond products, Web3SOC, SEAL | GREEN | Perp market-design commitments + monitoring oracle + bond + compensation waterfall |
+| Perp Passport | zkMe, zkPoC, Qiro/EZKL, Orochi, ZKredit | AMBER | Perp-position liquidation-distance and hedge-survival proof, not generic credit scoring |
+
+**Do not claim these on stage.**
+
+- Do not claim "the first perp risk score." HIP3Radar already scores HIP-3 markets.
+- Do not claim "the first funding-rate market." Rho X and Pendle Boros are live.
+- Do not claim "the first crypto VIX perp." Volmex BVIV is live on Hyperliquid.
+- Do not claim "the first ZK credit score." zkMe, zkPoC, Qiro, Orochi, and ZKredit exist.
+- Do not claim "the first liquidation insurance." Nexus Mutual has Leveraged Liquidation Cover.
+- Do not claim "the first digital twin." Tenderly and Base58 already ship digital-twin simulation.
+- Do not claim "the first certification." Web3SOC and SEAL already certify DeFi organizations.
+- Do not claim "no one has ever thought of this." Claim the narrower, verifiable thing: "no public product combines perp-specific liquidation-tail math, an adversarial certificate, a bonded verdict, and an onchain payout."
+
+---
+
+## 2.6 The wow bar: every flagship needs one jaw-drop moment
+
+A judge will not remember a feature list. The judge will remember one moment where the product does something that looks impossible, then explains it with real math. Every idea below gets one **wow moment** and one **stage line**. If the team cannot build the wow moment, cut the idea.
+
+| Idea | Wow moment | Stage line |
+|---|---|---|
+| Perp Nervous System | The index spikes minutes before a scripted cascade; a lending contract automatically cuts the collateral factor; a venue's stress bond goes "at risk"; the naive protocol is liquidated. | "We saw the cascade before it happened, and the contract acted on it." |
+| Perp Court | A live perp design is put on trial; the crossing-conditioned test finds a hidden 1.6x TWAP tail; the venue's bond is slashed on screen and the user is paid. | "We put a perp on trial, and the math won." |
+| Perp OS | The team types a payoff; a certified market deploys; a stress hits; the market changes its own margin inside its certificate and survives; a static clone breaks. | "We did not just launch a perp. We launched a perp that can survive." |
+| Perp CDX | A trader buys cover for a mark-delay event; the event happens; the vault pays onchain; the equity tranche takes the loss; senior capital survives. | "The hidden liquidation tail just became a payout." |
+| Perp Genome | Two funding rules enter the arena; the algorithm breeds a third; it beats both on a held-out stress; a venue licenses it and pays a royalty. | "We did not copy the funding template. We evolved a better one." |
+| Perp Markets | A mark-quality future and a liquidation-tail forward trade live; a plumbing-stress VIX spikes during a cascade even when price volatility is calm; a venue's funding hedge pays. | "We made the plumbing of perps tradeable." |
+| Perp Twin | The judge asks "what if Binance freezes and the mark lags 60 minutes?"; the twin shows the exact liquidation path, the bad debt, and who pays; the answer is minted as a report. | "Ask the market what would happen. It answers with a distribution." |
+| Perp Safe | A 20x trade is about to route to the cheapest venue; the screen turns red; the order reroutes and attaches cover; the cheap venue liquidates a shadow copy; the real user survives. | "We simulated your liquidation before you traded." |
+| Perp Constitution | A venue silently changes its mark delay; the compliance oracle catches it; the bond slashes and the user is compensated before the venue can tweet an excuse. | "The venue's promise is now code, and the bond is the proof." |
+| Perp Passport | A trader proves "liquidation distance > 20%, leverage < 20x" without revealing size; a lender cuts the rate; an insurer writes cover; the position stays private. | "Prove you can survive without showing your hand." |
+
+**The five out-of-world upgrades that separate this slate from a dashboard.**
+
+1. **Counterfactual death certificate.** For every trade or market, run a shadow copy through a historical or synthetic cascade and show the exact liquidation path. The user sees their own "death" before it happens. This is Perp Safe + Perp Twin.
+2. **Time travel.** Replay the October 10, 2025 cascade and the 2021 crash minute by minute, and show which design would have survived. The judge sees the product operate on a real disaster, not a toy scenario.
+3. **Bonded truth.** Every score, verdict, certificate, or alert has money behind it. If the model is wrong or the venue breaks its promise, the bond pays. This is the difference between a research project and a market primitive.
+4. **Risk as a tradeable object.** Do not stop at measuring the risk. Let the market hedge it: mark-quality futures, liquidation-tail forwards, and plumbing-stress VIX. This is Perp Markets, but only after the score and the certificate exist.
+5. **Proof without exposure.** Let the user prove survival without doxxing the position. This is Perp Passport, and it is the only idea that can bring privacy-preserving underwriting to perps.
+
+**The one-sentence framing that survives the reality check.**
+
+> "We are not the first to score a perp venue, trade a funding rate, or insure a liquidation. The white space is making perp liquidation risk **adversarially certified, financially bonded, and payable onchain** in one system."
+
+---
+
 ## 3. Evaluation rubric
 
 Every idea is scored from 1 to 5 on:
@@ -72,7 +161,7 @@ A score of 35/35 is not a claim of certainty. It means the idea is designed agai
 
 > **One sentence.** A real-time sensor network and cascade oracle for the entire perp market that detects systemic stress before liquidation and lets protocols de-risk automatically.
 
-**The crazy bet.** Build the "nervous system" for perps: not a dashboard, but an onchain fire alarm with financial consequences. The system senses funding stress, basis dislocation, mark latency, depth thinning, and liquidation clustering across venues, then publishes a cascade-risk index that lending protocols, perp DEXs, DAOs, and insurers consume. It is the first systemic-risk primitive for the largest crypto derivative market.
+**The crazy bet.** Build the "nervous system" for perps: not a dashboard, but an onchain fire alarm with financial consequences. The system senses funding stress, basis dislocation, mark latency, depth thinning, and liquidation clustering across venues, then publishes a cascade-risk index that lending protocols, perp DEXs, DAOs, and insurers consume. Existing products such as HIP3Radar score venue quality and OpenChainBench ranks execution; neither senses a cross-venue cascade, issues an actionable alert, and puts a bond behind it. The white space is the **action layer**, not the scoreboard.
 
 **Problem and buyer.** A lender cannot see that a perp venue's collateral is one funding spike away from a cascade. A DAO cannot see that its restaking hedge is correlated with the venue it uses. A perp DEX cannot see that its own funding rule is amplifying a move. A regulator has no index to watch. The buyer is every protocol that touches perp risk: lenders, insurers, vaults, DAOs, market makers, and venues that want to prove they are safe.
 
@@ -218,7 +307,7 @@ CEX/DEX APIs, onchain indexers, depth feeds, liquidation feeds
 
 > **One sentence.** An adversarial simulation court that puts a perp design on trial, replays exploits against it, certifies what survives, and bonds the verdict onchain.
 
-**The crazy bet.** Create the missing standards body for perps: an "Underwriters' Laboratory" that is adversarial, reproducible, and bonded. Anyone can file a case against a funding rule, a mark design, a margin schedule, or a liquidation engine. Independent agents attack the design in simulation. A verdict is published with evidence, confidence, and a bond. Venues that pass get a certificate that lowers their cost of capital; venues that fail pay.
+**The crazy bet.** Create the missing standards body for perps: an "Underwriters' Laboratory" that is adversarial, reproducible, and bonded. Anyone can file a case against a funding rule, a mark design, a margin schedule, or a liquidation engine. Independent agents attack the design in simulation. A verdict is published with evidence, confidence, and a bond. Venues that pass get a certificate that lowers their cost of capital; venues that fail pay. Web3SOC and SEAL already certify DeFi operations and security, and auditors review code, but none of them puts a perp's **funding feedback, mark latency, and liquidation tail** on trial with a bonded verdict.
 
 **Problem and buyer.** A perp venue can claim "audited" while its mark is a slow TWAP, its funding cap never binds, and its liquidation tail is hidden. A lender or insurer cannot verify the claim. A trader cannot compare designs. A regulator cannot see the assumptions. The buyer is the venue that wants credible differentiation, the insurer that needs a standard, the lender that needs a risk opinion, and the user who needs recourse.
 
@@ -370,7 +459,7 @@ Case intake (market spec + claim + evidence)
 
 > **One sentence.** An operating system for perpetual markets: any payoff becomes a self-tuning perp with adaptive funding, dynamic margin, a mark-quality-aware oracle, and a live risk certificate.
 
-**The crazy bet.** Most perp launchpads stop at deployment. Perp OS keeps the market alive. It compiles the payoff, calibrates the funding and margin controllers, chooses a mark design, launches the market, and then monitors and adapts within pre-committed risk bounds. It is not a static contract; it is a controlled system with a certificate that updates as the market regime changes.
+**The crazy bet.** Most perp launchpads stop at deployment. Perp OS keeps the market alive. It compiles the payoff, calibrates the funding and margin controllers, chooses a mark design, launches the market, and then monitors and adapts within pre-committed risk bounds. It is not a static contract; it is a controlled system with a certificate that updates as the market regime changes. A launchpad gives you a contract. Perp OS gives you a contract that is **certified to survive a regime it has not seen yet**.
 
 **Problem and buyer.** Launching a perp is bespoke. Teams copy a funding template, pick a mark, set a margin, and hope. Paper 4 shows the same template produces different effective feedback. Paper 6 shows a rule can be theoretically valid but empirically vacuous. Paper 7 shows a mark can hide a liquidation tail. No one compiles the whole design and keeps it inside a risk budget. The buyer is a perp DEX, a structured-product desk, an RWA issuer, a DAO launching a novel market, or a protocol that wants a certified instrument without building a risk team.
 
@@ -515,7 +604,7 @@ Payoff DSL / natural language
 
 > **One sentence.** A clearinghouse and tranched CDS index for perp liquidation tails that turns hidden bad debt into a tradeable, insurable asset class.
 
-**The crazy bet.** Build the "CDX for perps" and the "FDIC for perps" in one protocol. The market currently socializes bad debt or hides it in an insurance fund. Perp CDX makes the tail explicit: single-name venue or position cover, a basket index, tranches, and a capital vault. It is a new derivative with a real pricing kernel, real yield, and a systemic hedge.
+**The crazy bet.** Build the "CDX for perps" and the "FDIC for perps" in one protocol. The market currently socializes bad debt or hides it in an insurance fund. Perp CDX makes the tail explicit: single-name venue or position cover, a basket index, tranches, and a capital vault. It is a new derivative with a real pricing kernel, real yield, and a systemic hedge. Nexus Mutual covers leveraged **lending** loops, venue insurance funds mutualize **their own** bad debt, and MetaFlux has only a planned CDS market. The white space is an **external, tranched, transferable perp-tail index** with a public claims oracle.
 
 **Problem and buyer.** A trader can be liquidated at a price worse than the displayed liquidation level because the mark is delayed. A venue can suffer bad debt when the mark catches up. A DAO cannot hedge the systemic risk of the perp venues it uses. An insurer cannot price a tail without a standard. The buyer is the trader, the venue, the DAO, the lender, and the capital provider who wants yield from underwriting a measurable risk.
 
@@ -811,11 +900,11 @@ Genome schema + constraints
 
 ### 4.6 PERP MARKETS
 
-> **One sentence.** The first exchange for perp risk factors: funding-rate perps, basis perps, mark-quality futures, liquidation-tail forwards, and a tradeable Perp VIX.
+> **One sentence.** The missing exchange for the **unlisted plumbing risk** of perps: mark-quality futures, liquidation-tail forwards, and a plumbing-stress Perp VIX.
 
-**The crazy bet.** Create a new asset class by making the inputs of perp risk tradeable. Today traders can hedge ETH, but a venue cannot hedge its funding risk, a DAO cannot hedge its basis risk, and an insurer cannot hedge its liquidation-tail exposure. Perp Markets turns each risk factor into a standardized index and a contract, so the market can price and transfer the risk that the seven papers measure.
+**The crazy bet.** Do not build another funding-rate market. Rho X and Pendle Boros already trade funding rates and funding spreads, and Volmex BVIV already trades price volatility as a perp. The unlisted risk is the plumbing: **mark quality, funding timing, liquidation tails, and cross-venue transmission**. Perp Markets turns those into standardized indices and contracts, so a venue can hedge the tail it hides, a DAO can hedge the venue it uses, and an insurer can lay off the risk it underwrites.
 
-**Problem and buyer.** Funding risk, basis risk, mark risk, and liquidation-tail risk are not directly hedgeable. A market maker can hedge price but not a funding spike. A DAO can hedge ETH but not the perp venue's mark delay. An insurer can underwrite a tail but cannot lay it off. The buyer is the venue, the market maker, the DAO treasury, the insurer, and the basis trader who wants a pure exposure.
+**Problem and buyer.** Funding-rate trading is already solved. Mark-quality risk, liquidation-tail risk, and plumbing-stress risk are not directly hedgeable. A market maker can hedge price but not a 60-minute mark delay. A DAO can hedge ETH but not the perp venue's liquidation engine. An insurer can underwrite a tail but cannot lay it off. The buyer is the venue, the market maker, the DAO treasury, the insurer, and the basis trader who wants a pure plumbing exposure.
 
 **Paper spine.**
 
@@ -829,11 +918,11 @@ Genome schema + constraints
 
 **The primitive.** An index family:
 
-- **Funding Rate Index (FRI):** normalized cross-venue funding, 8-hour equivalent, robust median.
+- **Funding Rate Index (FRI):** normalized cross-venue funding, 8-hour equivalent, robust median. **Reference leg only; Rho/Boros already trade this.**
 - **Basis Index (BI):** clamp-aware deviation `rho`, aggregated across venues.
-- **Mark Quality Index (MQI):** delay, smoothing, crossing-conditioned overshoot, disclosure.
-- **Liquidation Tail Index (LTI):** breach probability and bad-debt probability at reference leverage.
-- **Perp VIX:** a composite systemic stress index.
+- **Mark Quality Index (MQI):** delay, smoothing, crossing-conditioned overshoot, disclosure. **The headline contract.**
+- **Liquidation Tail Index (LTI):** breach probability and bad-debt probability at reference leverage. **The second headline contract.**
+- **Perp VIX:** a **plumbing-stress** composite, not price volatility. It rises when funding, basis, mark quality, depth, and liquidation tails deteriorate, even if price volatility is calm.
 - **Two-Tier Index (TTI):** CEX-DEX integration and executable spread.
 
 Contracts:
@@ -849,7 +938,7 @@ Contracts:
 2. **Oracle.** Aggregate across venues with a median or trimmed mean. Use time weighting and a dispute window. Publish confidence and missingness. The oracle is the product's weakest point; treat it as such.
 3. **Contract design.** For each index, choose perp or future, margin, funding, cap, and settlement. Use Paper 1 to derive the funding for an index perp. Use a cash-settled future for a fixed maturity.
 4. **Market making.** Seed liquidity with a vault or a professional market maker. Publish risk limits and inventory rules. A cold-start market needs a subsidy or a committed quote.
-5. **Hedging.** A venue can short a funding-rate perp to hedge a funding spike. A DAO can buy Perp VIX protection. An insurer can buy a tail forward to lay off correlated exposure.
+5. **Hedging.** A venue can use the existing funding-rate market to hedge a funding spike, then use a mark-quality future or a liquidation-tail forward to hedge the plumbing risk that the funding hedge cannot touch. A DAO can buy plumbing-stress Perp VIX protection. An insurer can buy a tail forward to lay off correlated exposure.
 6. **Portfolio margin.** Allow cross-margining between the risk-factor contract and the underlying perp, with a risk model that accounts for correlation.
 7. **Settlement and disputes.** Cash settlement from the oracle. A dispute window and a fallback index. No physical delivery.
 8. **Risk monitoring.** Track index volatility, oracle deviation, liquidity, and concentration. Pause a market if the index is unreliable.
@@ -959,7 +1048,7 @@ Venue data (CEX/DEX) + onchain indexers
 
 > **One sentence.** A continuously calibrated digital twin of every perp market, with a scenario marketplace and an agentic risk analyst that answers "what breaks, when, and who pays?"
 
-**The crazy bet.** Give every perp venue, lender, and insurer a flight simulator. The twin is not a static backtest; it is a live model of the venue's funding, mark, margin, liquidity, and liquidation behavior, calibrated from public data and updated as the market changes. A scenario marketplace lets anyone sell a stress test, and an agentic analyst explains the result with citations to the data and the papers.
+**The crazy bet.** Give every perp venue, lender, and insurer a flight simulator. The twin is not a static backtest; it is a live model of the venue's funding, mark, margin, liquidity, and liquidation behavior, calibrated from public data and updated as the market changes. A scenario marketplace lets anyone sell a stress test, and an agentic analyst explains the result with citations to the data and the papers. Tenderly and Base58 already simulate chains and DeFi portfolios; none ships a **perp-specific** twin with an onchain score, a scenario marketplace, and a contract that consumes the answer.
 
 **Problem and buyer.** Risk teams cannot test a design without building a proprietary model. Data are fragmented. There is no common scenario language. A lender cannot ask "what happens to this collateral if funding spikes and the mark is delayed?" A venue cannot ask "which parameter change reduces the tail?" An insurer cannot ask "what is the loss distribution under a correlated cascade?" The buyer is the venue, the lender, the insurer, the DAO, and the researcher.
 
@@ -1101,7 +1190,7 @@ Venue specs + CEX/DEX data + onchain indexers
 
 > **One sentence.** A risk-adjusted execution firewall and router for perps that simulates liquidation before the trade, routes to the safest executable venue, and attaches tail insurance at the point of trade.
 
-**The crazy bet.** "Best execution" for perps should mean best survival-adjusted execution, not the lowest fee. Perp Safe puts a risk engine in front of every trade: it simulates the liquidation tail, checks the venue's mark quality and depth, routes the order to the best risk-adjusted price, and optionally attaches insurance. It is the consumer-facing layer that makes the seven papers usable by a normal trader or DAO.
+**The crazy bet.** "Best execution" for perps should mean best survival-adjusted execution, not the lowest fee. Perp Safe puts a risk engine in front of every trade: it simulates the liquidation tail, checks the venue's mark quality and depth, routes the order to the best risk-adjusted price, and optionally attaches insurance. DEX aggregators optimize price, and risk dashboards show scores; none simulates the user's own liquidation before the trade and attaches cover at the point of execution. It is the consumer-facing layer that makes the seven papers usable by a normal trader or DAO.
 
 **Problem and buyer.** A trader chooses a venue by fee and liquidity, not by mark quality, liquidation tail, or funding timing. A DAO treasury does the same. Wallets and aggregators show price, not survival. Insurers cannot underwrite at the point of trade. The buyer is the trader, the DAO, the wallet, the aggregator, and the insurer who wants distribution.
 
@@ -1239,7 +1328,7 @@ User intent (wallet / DAO / API)
 
 > **One sentence.** A bonded commitment protocol where perp venues lock their funding, mark, margin, and liquidation rules for a fixed term, and a monitoring oracle enforces the promises onchain.
 
-**The crazy bet.** Turn market-design promises into enforceable, tradeable guarantees. A venue publishes a "constitution": the funding formula, the cap, the mark method, the maximum delay, the margin schedule, the liquidation fees, and the oracle sources. It posts a bond. A monitoring oracle verifies compliance. If the venue breaks the constitution, the bond is slashed and users are compensated. It is an SLA for perp markets.
+**The crazy bet.** Turn market-design promises into enforceable, tradeable guarantees. A venue publishes a "constitution": the funding formula, the cap, the mark method, the maximum delay, the margin schedule, the liquidation fees, and the oracle sources. It posts a bond. A monitoring oracle verifies compliance. If the venue breaks the constitution, the bond is slashed and users are compensated. SLA and certification products exist, but none turns **perp market-design parameters** into a bonded, monitored commitment with a user compensation waterfall. It is an SLA for perp markets.
 
 **Problem and buyer.** Venues change funding caps, mark rules, and margin schedules with little notice. Users cannot verify what they are trading. Insurers and lenders cannot price rule risk. A venue that wants to differentiate cannot credibly commit. The buyer is the venue that wants trust, the trader who wants recourse, the insurer who wants a stable reference, and the lender who wants a disclosure standard.
 
@@ -1379,7 +1468,7 @@ Venue constitution (parameters + bounds + disclosure)
 
 > **One sentence.** A zero-knowledge risk and solvency passport for perp traders and DAOs, enabling private underwriting, better collateral terms, and portable liquidation protection.
 
-**The crazy bet.** Make perp risk verifiable without exposing the position. A trader can prove "my liquidation distance is above 20%, my leverage is below 5x, my venue is certified, and I have no bad debt" without revealing size, entry, or strategy. A lender can underwrite with a proof, an insurer can price with a proof, and a DAO can prove treasury solvency. It is privacy-preserving risk infrastructure, native to Ethereum.
+**The crazy bet.** Make perp risk verifiable without exposing the position. A trader can prove "my liquidation distance is above 20%, my leverage is below 5x, my venue is certified, and I have no bad debt" without revealing size, entry, or strategy. A lender can underwrite with a proof, an insurer can price with a proof, and a DAO can prove treasury solvency. Generic ZK credit exists (zkMe, zkPoC, Qiro/EZKL, Orochi, ZKredit); none proves **perp-specific liquidation distance, hedge survival, and venue risk** without revealing the position. It is privacy-preserving risk infrastructure, native to Ethereum.
 
 **Problem and buyer.** Lenders and insurers cannot assess perp risk without invasive data. Traders will not reveal positions. DAOs need to prove solvency without doxxing the treasury. Insurance suffers from adverse selection. The buyer is the trader who wants better terms, the DAO that needs privacy, the lender that wants a risk signal, and the insurer that wants a distribution channel.
 
@@ -1612,7 +1701,7 @@ Do not present ten disconnected projects. Present one system with three modules 
 
 | Criterion | How the grid wins |
 |---|---|
-| Novelty | First systemic-risk sensor, adversarial certifier, self-tuning perp OS, and perp CDS index in one stack |
+| Novelty | First **combination** of systemic-risk sensor, adversarial certifier, self-tuning perp OS, and perp CDS index in one stack |
 | Technical depth | Seven papers, real formulas, real data, real contracts, historical replay |
 | Demo | A cascade is sensed, a safe market is launched, the tail is insured, the naive market breaks |
 | Problem | Liquidation cascades, hidden bad debt, opaque funding, no standards |
@@ -1622,6 +1711,8 @@ Do not present ten disconnected projects. Present one system with three modules 
 | Sponsor independence | Chain-agnostic, no proprietary SDK, public data, Ethereum/L2 deployment |
 | Judge recall | "We built the safety grid for perps: sense the cascade, certify the market, insure the tail" |
 | Claim discipline | Testnet, confidence intervals, model-risk disclosures, no risk-free claims |
+
+**The reality-check version of the pitch.** Every module has an adjacent product. HIP3Radar scores venue quality; OpenChainBench ranks execution; Rho X and Pendle Boros trade funding; Volmex trades price volatility; Nexus Mutual covers leveraged lending loops; Tenderly and Base58 simulate chains; Web3SOC and SEAL certify operations. None of them puts a perp's **funding feedback, mark latency, margin design, and liquidation tail** on trial, bonds the verdict, and pays the tail onchain. The clean-sweep wedge is the **combination and the consequence**, not a claim of inventing a category from zero.
 
 **The one-sentence pitch.**
 
