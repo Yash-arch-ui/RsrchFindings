@@ -58,3 +58,5 @@ Five papers covering the privacy side of perpetuals and private order matching:
 - **TierBridge** for execution-aware CEX-DEX funding arbitrage.
 
 See [the idea lab](perpetuals/08-hackathon-idea-lab.md) for the full portfolio, scoring, team split, demo script, and judge Q&A. See [clean-sweep flagship ideas](perpetuals/09-flagship-ideas-clean-sweep.md) for the Perp Risk Bureau concept: PerpScore, Perp VIX, Perp Forge, and PerpShield. See [crazy flagship ideas](perpetuals/10-flagship-ideas-crazy-sweep.md) for the expanded Perp Safety Grid slate: Perp Nervous System, Perp Court, Perp OS, Perp CDX, Perp Genome, Perp Markets, Perp Twin, Perp Safe, Perp Constitution, and Perp Passport, with full workflows, a verified existing-product scan, jaw-drop demo moments, and honest cons for each.
+
+**RWA perps:** [Autonom Risk OS](perpetuals/11-autonom-rwa-perp-risk-os.md) — a Monad/ETH full-stack thesis for corporate-action-aware RWA perps: event-credit funding, market-calendar risk, a risk autopilot, and a market-integrity certificate.

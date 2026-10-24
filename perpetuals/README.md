@@ -40,6 +40,10 @@ This combines the technical depth of Paper 1, the market signal and risk framewo
 
 See [08-hackathon-idea-lab.md](08-hackathon-idea-lab.md) for the full idea set, Wave 2/3/4/5 additions, scoring matrix, team split, demo, and judge Q&A. See [09-flagship-ideas-clean-sweep.md](09-flagship-ideas-clean-sweep.md) for the three clean-sweep flagship concepts: PerpScore/Perp VIX, Perp Forge with risk certificates and stress bonds, and PerpShield liquidation-tail insurance. See [10-flagship-ideas-crazy-sweep.md](10-flagship-ideas-crazy-sweep.md) for the expanded Perp Safety Grid slate: ten full flagship ideas with end-to-end workflows, contract architecture, demo scripts, team/agent splits, and honest cons for each, plus a verified existing-product scan, a jaw-drop "wow bar" for every idea, and a recommended Perp Nervous System + Perp OS + Perp CDX clean-sweep portfolio.
 
+## RWA perps: Autonom Risk OS
+
+[11-autonom-rwa-perp-risk-os.md](11-autonom-rwa-perp-risk-os.md) — a Monad/ETH full-stack thesis for corporate-action-aware RWA perps: event-credit funding, market-calendar risk, a risk autopilot, and a market-integrity certificate, with a sourced 2026 incident and market landscape.
+
 ## Access note on Paper 4
 
 The full SSRN PDF for Paper 4 could not be retrieved because SSRN's content-protection layer blocked direct, archived, and proxied downloads. A second retrieval attempt (October 2026) via SSRN, the Internet Archive, ResearchGate, and the author's site also failed to yield the full PDF. The Paper 4 file separates verified abstract and metadata claims from a clearly marked analytical reconstruction. Do not cite the reconstruction as the authors' model.
