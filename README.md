@@ -1,13 +1,30 @@
 # RsrchFindings
 
-Research findings and hackathon ideation for perpetual futures and cryptocurrency funding-rate markets.
+Research findings and hackathon ideation for perpetual futures, privacy, Zcash, Monad, and agentic e-commerce.
 
 ## Contents
 
 - [Perpetuals research](perpetuals/README.md) — paper-by-paper findings, equation ledgers, limitations, hackathon preparation, and a full idea lab.
 - [Privacy x Perpetuals research](privacy-x-perpetuals/README.md) — private perps, encrypted-mempool funding security, private order matching, leakage taxonomy, and the VeilPerp flagship stack.
+- [Privacy research](privacy/README.md) — BBS+ anonymous credentials, issuer hiding, revocation, and delegated verifiable presentations.
+- [Privacy x Agentic E-Commerce research](privacy-x-agentic-ecommerce/README.md) — agent payments, AP2 security, MCP spending controls, LLM privacy leakage, and multi-agent commerce.
+- [Zcash privacy research](zcash/README.md) — Halo recursive proofs, Zcash transaction linkability, and the Orchard circuit audit.
+- [Zcash + Monad flagship ideas](flagship-ideas/README.md) — ten deep product ideas, each with problem, solution, sources, workflow, demo, cons, and judge Q&A.
+- [Source map](SOURCE-MAP.md) — all 16 unique sources, access status, and where each is analyzed.
 
-## Papers covered
+## Zcash + Monad Hackathons
+
+Primary focus: **Zcash** and **Monad**. ETHGlobal is the fallback.
+
+The research set covers 16 unique sources across three folders:
+
+- **Zcash:** Halo recursion, 2017 Zcash linkability measurement, and the 2026 Orchard audit.
+- **Privacy:** BBS+ credentials with revocation and device binding, issuer hiding, and delegated verifiable presentations.
+- **Privacy x Agentic E-Commerce:** MinMandate, AESP, TIVA, Cloaked MCP, AP2 security, two agentic-commerce SoKs, ConfAIde, PrivacyChecker, and MAGPIE.
+
+**Recommended flagship:** **VeilMandate** — one private, task-scoped mandate lets an agent shop across merchants with fresh per-call credentials and Zcash-shielded settlement, so the agent can adapt without exposing the human's intent. Pair it with **IntentGuard** (context-binding payment firewall) and **Boundary Radar** (Zcash linkability lint). See [the flagship slate](flagship-ideas/README.md).
+
+## Perpetuals papers covered
 
 1. *A Primer on Perpetuals* (Angeris, Chitra, Evans, Lorig, 2022)
 2. *Fundamentals of Perpetual Futures* (He, Manela, Ross, von Wachter, 2024)
@@ -29,7 +46,7 @@ Five papers covering the privacy side of perpetuals and private order matching:
 
 **Flagship direction: VeilPerp** — a privacy-native perp stack with private positions, private batch matching, public risk proofs, decryption-aware funding (CipherClock), threshold liquidation, bonded settlement, and a phase-by-observer leakage passport. See [the privacy synthesis](privacy-x-perpetuals/06-privacy-perp-flagship-ideas.md) for the full slate, workflows, cons, demo script, and judge Q&A.
 
-## Flagship direction
+## Perpetuals flagship direction
 
 **Perp Forge 5.0** — a compiler and launchpad for new perpetuals, with:
 
