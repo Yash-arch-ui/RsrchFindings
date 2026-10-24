@@ -1,6 +1,6 @@
 # Flagship Ideas — Zcash + Monad
 
-Ten hackathon ideas built from the 16-source research set. Each file contains the deep problem, the solution, the source mapping, an intuitive workflow, a demo, hackathon fit, cons, judge Q&A, and claims to avoid.
+Ten hackathon ideas built from the 16-source research set. Each file contains the deep problem, the solution, the source mapping, an intuitive workflow, a demo, hackathon fit, cons, judge Q&A, and claims to avoid. Each idea file lives directly in its primary topic folder; this page is the cross-topic index.
 
 **Primary targets:** Zcash hackathon and Monad hackathon. ETHGlobal is the fallback. See [TRACKS.md](TRACKS.md) for the track-by-track build map.
 
@@ -8,16 +8,16 @@ Ten hackathon ideas built from the 16-source research set. Each file contains th
 
 | # | Idea | Target | One-liner | Papers used |
 |---|---|---|---|---|
-| 1 | [VeilMandate](01-veilmandate.md) | Zcash + Monad | One human approval, many merchant choices, zero cross-merchant linkage | MinMandate, AP2, BBS+, issuer hiding, Zcash linkability, Orchard audit |
-| 2 | [GhostCart](02-ghostcart.md) | Zcash + Monad | Private sealed-bid procurement with shielded settlement | MinMandate, BBS+, issuer hiding, Zcash linkability, AP2, A2A SoK |
-| 3 | [IntentGuard](03-intentguard.md) | Monad + Zcash | A signed mandate is not intent; bind the context before signing | AP2, SoK LLM agents, AESP, TIVA, MinMandate, Cloaked |
-| 4 | [Sovereign Runtime](04-sovereign-runtime.md) | Monad + Zcash | An agent wallet where the model can reason but cannot move money outside policy | AESP, TIVA, Cloaked, BBS+, delegation, MinMandate |
-| 5 | [ContextCurtain](05-contextcurtain.md) | Monad + Zcash | Multi-agent commerce without leaking the secrets that close the deal | MAGPIE, ConfAIde, PrivacyChecker, SoK LLM agents, A2A SoK |
-| 6 | [ShadeScore](06-shadescore.md) | Zcash + Monad | Prove creditworthiness without revealing history, counterparties, or human | BBS+, issuer hiding, delegation, Zcash linkability, A2A SoK, TIVA |
-| 7 | [Orchard Sentinel](07-orchard-sentinel.md) | Zcash | Verifiable circuit CI that catches the Orchard audit's gadget footguns | Orchard audit, Halo, Zcash linkability |
-| 8 | [Boundary Radar](08-boundary-radar.md) | Zcash | Local privacy lint for shield/unshield linkability | Zcash linkability, Orchard audit, Halo |
-| 9 | [Halo Mandate](09-halo-mandate.md) | Zcash + Monad | One recursive proof of an agent's entire authority and payment history | Halo, Orchard audit, MinMandate, BBS+, issuer hiding, Zcash linkability |
-| 10 | [Veil402](10-veil402.md) | Monad + Zcash | Private pay-per-use APIs with sealed quotes, shielded batches, and delivery receipts | A2A SoK, MinMandate, Cloaked, AESP, TIVA, AP2, Zcash linkability |
+| 1 | [VeilMandate](privacy-x-agentic-ecommerce/01-veilmandate.md) | Zcash + Monad | One human approval, many merchant choices, zero cross-merchant linkage | MinMandate, AP2, BBS+, issuer hiding, Zcash linkability, Orchard audit |
+| 2 | [GhostCart](privacy-x-agentic-ecommerce/02-ghostcart.md) | Zcash + Monad | Private sealed-bid procurement with shielded settlement | MinMandate, BBS+, issuer hiding, Zcash linkability, AP2, A2A SoK |
+| 3 | [IntentGuard](privacy-x-agentic-ecommerce/03-intentguard.md) | Monad + Zcash | A signed mandate is not intent; bind the context before signing | AP2, SoK LLM agents, AESP, TIVA, MinMandate, Cloaked |
+| 4 | [Sovereign Runtime](privacy-x-agentic-ecommerce/04-sovereign-runtime.md) | Monad + Zcash | An agent wallet where the model can reason but cannot move money outside policy | AESP, TIVA, Cloaked, BBS+, delegation, MinMandate |
+| 5 | [ContextCurtain](privacy-x-agentic-ecommerce/05-contextcurtain.md) | Monad + Zcash | Multi-agent commerce without leaking the secrets that close the deal | MAGPIE, ConfAIde, PrivacyChecker, SoK LLM agents, A2A SoK |
+| 6 | [ShadeScore](privacy/06-shadescore.md) | Zcash + Monad | Prove creditworthiness without revealing history, counterparties, or human | BBS+, issuer hiding, delegation, Zcash linkability, A2A SoK, TIVA |
+| 7 | [Orchard Sentinel](zcash/07-orchard-sentinel.md) | Zcash | Verifiable circuit CI that catches the Orchard audit's gadget footguns | Orchard audit, Halo, Zcash linkability |
+| 8 | [Boundary Radar](zcash/08-boundary-radar.md) | Zcash | Local privacy lint for shield/unshield linkability | Zcash linkability, Orchard audit, Halo |
+| 9 | [Halo Mandate](zcash/09-halo-mandate.md) | Zcash + Monad | One recursive proof of an agent's entire authority and payment history | Halo, Orchard audit, MinMandate, BBS+, issuer hiding, Zcash linkability |
+| 10 | [Veil402](privacy-x-agentic-ecommerce/10-veil402.md) | Monad + Zcash | Private pay-per-use APIs with sealed quotes, shielded batches, and delivery receipts | A2A SoK, MinMandate, Cloaked, AESP, TIVA, AP2, Zcash linkability |
 
 ## Recommended portfolio
 

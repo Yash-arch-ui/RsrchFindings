@@ -29,13 +29,13 @@ Research on private, secure agent payments and agentic commerce. This is the pro
 
 ## Flagship ideas from this folder
 
-- [VeilMandate](../flagship-ideas/01-veilmandate.md) — task-scoped private agent payments on Zcash.
-- [GhostCart](../flagship-ideas/02-ghostcart.md) — sealed-bid procurement with shielded settlement.
-- [IntentGuard](../flagship-ideas/03-intentguard.md) — AP2/MCP context-binding firewall.
-- [Sovereign Runtime](../flagship-ideas/04-sovereign-runtime.md) — deterministic agent wallet.
-- [ContextCurtain](../flagship-ideas/05-contextcurtain.md) — multi-agent contextual-integrity firewall.
-- [ShadeScore](../flagship-ideas/06-shadescore.md) — private credit/reputation.
-- [Veil402](../flagship-ideas/10-veil402.md) — private pay-per-use APIs.
+- [VeilMandate](01-veilmandate.md) — task-scoped private agent payments on Zcash.
+- [GhostCart](02-ghostcart.md) — sealed-bid procurement with shielded settlement.
+- [IntentGuard](03-intentguard.md) — AP2/MCP context-binding firewall.
+- [Sovereign Runtime](04-sovereign-runtime.md) — deterministic agent wallet.
+- [ContextCurtain](05-contextcurtain.md) — multi-agent contextual-integrity firewall.
+- [ShadeScore](../privacy/06-shadescore.md) — private credit/reputation.
+- [Veil402](10-veil402.md) — private pay-per-use APIs.
 
 ## Access note
 

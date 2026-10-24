@@ -28,7 +28,7 @@ General privacy primitives used by the Zcash and Monad hackathon ideas. These pa
 
 ## Ideas that use this folder
 
-- [VeilMandate](../flagship-ideas/01-veilmandate.md) — task-scoped credentials + shielded payments.
-- [ShadeScore](../flagship-ideas/06-shadescore.md) — issuer-hidden credit predicates.
-- [Sovereign Runtime](../flagship-ideas/04-sovereign-runtime.md) — scoped delegation for agents.
-- [Halo Mandate](../flagship-ideas/09-halo-mandate.md) — recursive proof of delegated authority.
+- [VeilMandate](../privacy-x-agentic-ecommerce/01-veilmandate.md) — task-scoped credentials + shielded payments.
+- [ShadeScore](06-shadescore.md) — issuer-hidden credit predicates.
+- [Sovereign Runtime](../privacy-x-agentic-ecommerce/04-sovereign-runtime.md) — scoped delegation for agents.
+- [Halo Mandate](../zcash/09-halo-mandate.md) — recursive proof of delegated authority.

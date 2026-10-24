@@ -31,8 +31,8 @@ The Halo ePrint PDF was Cloudflare-blocked live, but the full 2020-02-18 revisio
 
 ## Ideas that use this folder
 
-- [Boundary Radar](../flagship-ideas/08-boundary-radar.md)
-- [Orchard Sentinel](../flagship-ideas/07-orchard-sentinel.md)
-- [Halo Mandate](../flagship-ideas/09-halo-mandate.md)
-- [VeilMandate](../flagship-ideas/01-veilmandate.md)
-- [GhostCart](../flagship-ideas/02-ghostcart.md)
+- [Boundary Radar](08-boundary-radar.md)
+- [Orchard Sentinel](07-orchard-sentinel.md)
+- [Halo Mandate](09-halo-mandate.md)
+- [VeilMandate](../privacy-x-agentic-ecommerce/01-veilmandate.md)
+- [GhostCart](../privacy-x-agentic-ecommerce/02-ghostcart.md)

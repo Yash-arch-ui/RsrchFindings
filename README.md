@@ -9,7 +9,7 @@ Research findings and hackathon ideation for perpetual futures, privacy, Zcash, 
 - [Privacy research](privacy/README.md) — BBS+ anonymous credentials, issuer hiding, revocation, and delegated verifiable presentations.
 - [Privacy x Agentic E-Commerce research](privacy-x-agentic-ecommerce/README.md) — agent payments, AP2 security, MCP spending controls, LLM privacy leakage, and multi-agent commerce.
 - [Zcash privacy research](zcash/README.md) — Halo recursive proofs, Zcash transaction linkability, and the Orchard circuit audit.
-- [Zcash + Monad flagship ideas](flagship-ideas/README.md) — ten deep product ideas, each with problem, solution, sources, workflow, demo, cons, and judge Q&A.
+- [Zcash + Monad flagship ideas](IDEAS.md) — ten deep product ideas, each with problem, solution, sources, workflow, demo, cons, and judge Q&A.
 - [Source map](SOURCE-MAP.md) — all 16 unique sources, access status, and where each is analyzed.
 
 ## Zcash + Monad Hackathons
@@ -22,7 +22,7 @@ The research set covers 16 unique sources across three folders:
 - **Privacy:** BBS+ credentials with revocation and device binding, issuer hiding, and delegated verifiable presentations.
 - **Privacy x Agentic E-Commerce:** MinMandate, AESP, TIVA, Cloaked MCP, AP2 security, two agentic-commerce SoKs, ConfAIde, PrivacyChecker, and MAGPIE.
 
-**Recommended flagship:** **VeilMandate** — one private, task-scoped mandate lets an agent shop across merchants with fresh per-call credentials and Zcash-shielded settlement, so the agent can adapt without exposing the human's intent. Pair it with **IntentGuard** (context-binding payment firewall) and **Boundary Radar** (Zcash linkability lint). See [the flagship slate](flagship-ideas/README.md).
+**Recommended flagship:** **VeilMandate** — one private, task-scoped mandate lets an agent shop across merchants with fresh per-call credentials and Zcash-shielded settlement, so the agent can adapt without exposing the human's intent. Pair it with **IntentGuard** (context-binding payment firewall) and **Boundary Radar** (Zcash linkability lint). See [the flagship slate](IDEAS.md).
 
 ## Perpetuals papers covered
 
