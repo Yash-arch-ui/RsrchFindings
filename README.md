@@ -44,7 +44,7 @@ Five papers covering the privacy side of perpetuals and private order matching:
 4. *Privacy-Preserving Decentralized Exchange Marketplaces* (Govindarajan et al., 2021) — Rialto
 5. *P2DEX: Privacy-Preserving Decentralized Cryptocurrency Exchange* (Baum, David, Frederiksen, 2021)
 
-**Flagship direction: VeilPerp** — a privacy-native perp stack with private positions, private batch matching, public risk proofs, decryption-aware funding (CipherClock), threshold liquidation, bonded settlement, and a phase-by-observer leakage passport. See [the privacy synthesis](privacy-x-perpetuals/06-privacy-perp-flagship-ideas.md) for the full slate, workflows, cons, demo script, and judge Q&A.
+**Flagship direction: VeilPerp** — a privacy-native perp stack framed as **sealed books with public invariants**: a Sealed-Book Solvency Envelope, private batch matching, decryption-aware funding with a manipulation-immunity certificate (CipherClock), threshold liquidation, challengeable clearing with privacy-loss bonds (Bonded Shade), and an adversary-equivalence leakage passport. See [the privacy synthesis](privacy-x-perpetuals/06-privacy-perp-flagship-ideas.md) for the full slate, once-a-decade primitives, impossible demos, workflows, cons, demo script, and judge Q&A.
 
 ## Perpetuals flagship direction
 

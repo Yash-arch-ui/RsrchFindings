@@ -39,17 +39,17 @@ The synthesis is: **private positions need private matching, private funding, an
 
 ## Recommended flagship direction
 
-Build **VeilPerp** — a privacy-native perpetual exchange with:
+Build **VeilPerp** — a privacy-native perpetual exchange framed as **sealed books with public invariants**:
 
+- **Sealed-Book Solvency Envelope**: prove worst-case solvency over hidden positions under a committed stress set, without revealing any position.
 - **Private position notes** and BHP256/Schnorr-style commitments.
 - **Private batch order flow** using commit-reveal, threshold encryption, or MPC/FHE matching.
-- **Public aggregate risk proofs** for OI, insurance coverage, and solvency.
-- **CipherClock funding**: reveal, correct, measure, then pay; eligibility snapshot before the batch.
+- **CipherClock funding with a manipulation-immunity certificate**: reveal, correct, measure, then pay; publish the bound on concealed-batch extraction.
 - **Threshold liquidation**: keeper proofs of underwaterness without public position disclosure.
-- **VeilPassport**: a phase-by-observer leakage map and a solvency attestation for LPs/institutions.
-- **Bonded settlement**: server/keeper bonds, public verifiability, and refund paths.
+- **VeilPassport as an adversary-equivalence certificate**: prove or disprove a venue's privacy claim for a declared observer, not just a leakage map.
+- **Bonded Shade**: challengeable private clearing with privacy-loss bonds, server/keeper bonds, public verifiability, and refund paths.
 
-See [06-privacy-perp-flagship-ideas.md](06-privacy-perp-flagship-ideas.md) for the full flagship slate, workflows, cons, demo script, team split, and judge Q&A.
+See [06-privacy-perp-flagship-ideas.md](06-privacy-perp-flagship-ideas.md) for the full flagship slate, once-a-decade primitives, impossible demos, workflows, cons, demo script, team split, and judge Q&A.
 
 ## Honest scope notes
 
