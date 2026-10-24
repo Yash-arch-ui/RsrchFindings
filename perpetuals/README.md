@@ -42,7 +42,7 @@ See [08-hackathon-idea-lab.md](08-hackathon-idea-lab.md) for the full idea set, 
 
 ## Access note on Paper 4
 
-The full SSRN PDF for Paper 4 could not be retrieved because SSRN's content-protection layer blocked direct, archived, and proxied downloads. The Paper 4 file separates verified abstract and metadata claims from a clearly marked analytical reconstruction. Do not cite the reconstruction as the authors' model.
+The full SSRN PDF for Paper 4 could not be retrieved because SSRN's content-protection layer blocked direct, archived, and proxied downloads. A second retrieval attempt (October 2026) via SSRN, the Internet Archive, ResearchGate, and the author's site also failed to yield the full PDF. The Paper 4 file separates verified abstract and metadata claims from a clearly marked analytical reconstruction. Do not cite the reconstruction as the authors' model.
 
 ## Data and reproducibility note on Paper 5
 

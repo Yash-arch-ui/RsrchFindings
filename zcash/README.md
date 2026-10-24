@@ -27,7 +27,7 @@ Zcash-only privacy research for the Zcash hackathon. This folder covers the proo
 
 ## Access note
 
-The Halo ePrint PDF was Cloudflare-blocked; the file uses the local abstract/metadata and cross-checked public Halo/Halo2 material, with claims tagged. The Orchard audit and linkability paper were read in full locally.
+The Halo ePrint PDF was Cloudflare-blocked live, but the full 2020-02-18 revision was read from an Internet Archive copy. The Orchard audit and linkability paper were read in full locally. Halo2/Pasta/Orchard lineage in the Halo note is external background, not text from the 2019 paper.
 
 ## Ideas that use this folder
 

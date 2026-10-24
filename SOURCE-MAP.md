@@ -8,11 +8,11 @@ The user supplied 16 unique sources (17 links, with Paper 12 and Paper 13 being 
 | 2 | [AESP (arXiv 2603.00318)](https://arxiv.org/pdf/2603.00318) | Protocol + SDK | [privacy-x-agentic-ecommerce/papers/02-aesp-2026.md](privacy-x-agentic-ecommerce/papers/02-aesp-2026.md) | Full PDF read |
 | 3 | [Secure Autonomous Agent Payments (arXiv 2511.15712)](https://arxiv.org/pdf/2511.15712) | Conceptual framework | [privacy-x-agentic-ecommerce/papers/03-secure-autonomous-agent-payments-2025.md](privacy-x-agentic-ecommerce/papers/03-secure-autonomous-agent-payments-2025.md) | Full PDF read |
 | 4 | [Cloaked MCP Server](https://glama.ai/mcp/servers/CloakedAgent/cloaked) | Vendor product page | [privacy-x-agentic-ecommerce/papers/04-cloaked-mcp-2026.md](privacy-x-agentic-ecommerce/papers/04-cloaked-mcp-2026.md) | Full page read; vendor claims only, no audit |
-| 5 | [Halo (ePrint 2019/1021)](https://eprint.iacr.org/2019/1021) | Construction + implementation | [zcash/papers/01-halo-recursive-proofs-2019.md](zcash/papers/01-halo-recursive-proofs-2019.md) | ePrint PDF blocked; abstract/metadata + public Halo/Halo2 sources, claims tagged |
+| 5 | [Halo (ePrint 2019/1021)](https://eprint.iacr.org/2019/1021) | Construction + implementation | [zcash/papers/01-halo-recursive-proofs-2019.md](zcash/papers/01-halo-recursive-proofs-2019.md) | Full PDF read via Internet Archive copy of the 2020-02-18 ePrint revision |
 | 6 | [On the linkability of Zcash transactions (arXiv 1712.01210)](https://arxiv.org/pdf/1712.01210) | Empirical measurement | [zcash/papers/02-zcash-linkability-2017.md](zcash/papers/02-zcash-linkability-2017.md) | Full PDF read |
 | 7 | [Audit of Zcash: Orchard (zkSecurity, 2026)](https://reports.zksecurity.xyz/reports/zcash-orchard/) | Security audit + formal verification | [zcash/papers/03-orchard-audit-2026.md](zcash/papers/03-orchard-audit-2026.md) | Full report text read |
-| 8a | [BBS+ AC spec (ePrint 2025/824)](https://eprint.iacr.org/2025/824) | Specification | [privacy/papers/01-bbs-anonymous-credentials-2025.md](privacy/papers/01-bbs-anonymous-credentials-2025.md) | ePrint PDF blocked; abstract/metadata + PDF excerpts, claims tagged |
-| 8b | [Improved Issuer Hiding (ePrint 2026/555)](https://eprint.iacr.org/2026/555) | Protocol + security model | [privacy/papers/02-issuer-hiding-bbs-2026.md](privacy/papers/02-issuer-hiding-bbs-2026.md) | ePrint PDF blocked; abstract/metadata + PDF excerpts, claims tagged |
+| 8a | [BBS+ AC spec (ePrint 2025/824)](https://eprint.iacr.org/2025/824) | Specification | [privacy/papers/01-bbs-anonymous-credentials-2025.md](privacy/papers/01-bbs-anonymous-credentials-2025.md) | Full PDF read via Internet Archive copy of the 2025-05-02 ePrint revision |
+| 8b | [Improved Issuer Hiding (ePrint 2026/555)](https://eprint.iacr.org/2026/555) | Protocol + security model | [privacy/papers/02-issuer-hiding-bbs-2026.md](privacy/papers/02-issuer-hiding-bbs-2026.md) | Full PDF read via Internet Archive copy of the 2026-03-20 revision; current 2026-07-03 revision and AIH are excerpt-level |
 | 9 | [Delegation of Verifiable Presentations (ePrint 2025/2306)](https://eprint.iacr.org/2025/2306) | Formalization + constructions | [privacy/papers/03-delegation-verifiable-presentations-2025.md](privacy/papers/03-delegation-verifiable-presentations-2025.md) | ePrint PDF blocked; full CEUR workshop version + ePrint excerpts |
 | 10 | [SoK: Security of Autonomous LLM Agents (arXiv 2604.15367)](https://arxiv.org/pdf/2604.15367) | SoK | [privacy-x-agentic-ecommerce/papers/05-sok-security-autonomous-llm-agents-2026.md](privacy-x-agentic-ecommerce/papers/05-sok-security-autonomous-llm-agents-2026.md) | Full PDF read |
 | 11 | [SoK: Blockchain Agent-to-Agent Payments (arXiv 2604.03733)](https://arxiv.org/pdf/2604.03733) | SoK | [privacy-x-agentic-ecommerce/papers/06-sok-blockchain-agent-to-agent-payments-2026.md](privacy-x-agentic-ecommerce/papers/06-sok-blockchain-agent-to-agent-payments-2026.md) | Full PDF read |
@@ -24,22 +24,27 @@ The user supplied 16 unique sources (17 links, with Paper 12 and Paper 13 being 
 
 ## Access limitation
 
-`eprint.iacr.org` serves its PDFs behind a Cloudflare challenge for this environment. The abstracts, metadata, page text, and (where available) GitHub/CEUR versions were read. Files for the four blocked ePrint sources use tags such as `[L]`, `[X]`, `[S]`, `[B]`, `[I]` to separate verified local claims from secondary or inferred detail.
+`eprint.iacr.org` serves live PDFs behind a Cloudflare challenge for this environment. Where an Internet Archive snapshot of the PDF existed, the full paper was retrieved and read from that copy: Halo, the BBS+ AC specification, and the 2026-03-20 revision of Improved Issuer Hiding. Their notes are now full-text based.
 
-Do not present unverified equations, page counts, or benchmarks from the blocked PDFs as the authors' own. The hackathon ideas use those papers at the level of their verified abstracts and well-known schemes, not as proof of a specific numeric result.
+Two sources remain partly access-limited:
+
+- **Zhang, Wang, Zhang (SSRN 6185958).** The 59-page PDF is still blocked after attempts via SSRN, the Internet Archive, ResearchGate, and the author's site. The note keeps a clearly marked reconstruction. Do not cite it as the authors' model.
+- **Delegation ePrint extension (2025/2306).** The ePrint PDF is blocked, but the full CEUR workshop version was read. BBS-specific ePrint additions remain excerpt-level and are tagged.
 
 ## What is fully verified
 
 - Full arxiv PDFs: AESP, Secure Agent Payments, the two SoKs, AP2, ConfAIde, PrivacyChecker, MAGPIE.
 - Full Zcash report: Orchard audit.
 - Full Zcash paper: linkability.
+- Full Halo paper via Internet Archive (2020-02-18 revision).
+- Full BBS+ AC specification via Internet Archive (2025-05-02 revision).
+- Full Improved Issuer Hiding v1 via Internet Archive (2026-03-20 revision); the 2026-07-03 revision is not.
 - Full local page: Cloaked.
 - Full MinMandate preprint via GitHub.
-- Full CEUR workshop version of the delegation paper (BBS extension via excerpts).
+- Full CEUR workshop version of the delegation paper.
 
-## What is abstract-level
+## What is abstract-level or partially verified
 
-- Halo (ePrint 2019/1021)
-- BBS+ AC spec (ePrint 2025/824)
-- Improved Issuer Hiding (ePrint 2026/555)
-- Delegation ePrint extension (the workshop version is full)
+- Zhang, Wang, Zhang (SSRN 6185958): abstract/metadata plus a marked reconstruction.
+- Delegation ePrint extension: the CEUR workshop version is full; the ePrint-only BBS additions are excerpt-level.
+- Improved Issuer Hiding 2026-07-03 revision and its Accountable Issuer Hiding section: excerpt-level.

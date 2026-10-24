@@ -24,7 +24,7 @@ General privacy primitives used by the Zcash and Monad hackathon ideas. These pa
 2. **Issuer hiding is underrated.** If every merchant learns that the same bank issued the credential, issuer-based profiling replaces user-based profiling.
 3. **Delegation must be scoped to the verifier and operation.** A general "agent may act for me" credential is an over-broad mandate.
 4. **Accountable anonymity is the practical compromise.** Privacy by default, attribution by exception for fraud.
-5. **Access limitation:** the full ePrint PDFs for all three papers were Cloudflare-blocked. The files separate verified abstract/metadata claims from secondary-source and inference-tagged detail. Do not quote unverified equations or benchmarks as the authors' own.
+5. **Access status:** the BBS+ specification and Improved Issuer Hiding full PDFs were read from Internet Archive copies of their ePrint revisions. The delegation paper was read from its full CEUR workshop version; its ePrint-only additions and the latest issuer-hiding revision remain excerpt-level. Do not quote unverified equations or benchmarks as the authors' own.
 
 ## Ideas that use this folder
 
