@@ -8,7 +8,7 @@ Research findings and hackathon ideation for perpetual futures, privacy, Zcash, 
 - [Privacy x Perpetuals research](privacy-x-perpetuals/README.md) — private perps, encrypted-mempool funding security, private order matching, leakage taxonomy, and the VeilPerp flagship stack.
 - [Privacy research](privacy/README.md) — BBS+ anonymous credentials, issuer hiding, revocation, and delegated verifiable presentations.
 - [Privacy x Agentic E-Commerce research](privacy-x-agentic-ecommerce/README.md) — agent payments, AP2 security, MCP spending controls, LLM privacy leakage, and multi-agent commerce.
-- [Stablecoin payments](stablecoin-payments/README.md) — DashX Corridor: compliant stablecoin-to-local-rails settlement for Monad and ETH.
+- [Stablecoin payments](stablecoin-payments/README.md) — Passage Corridor: compliant stablecoin-to-local-rails settlement for Monad and ETH.
 - [Zcash privacy research](zcash/README.md) — Halo recursive proofs, Zcash transaction linkability, and the Orchard circuit audit.
 - [Zcash + Monad flagship ideas](IDEAS.md) — ten category-defining product ideas with once-a-decade primitives, impossible-to-fake demos, research sources, workflows, cons, and judge Q&A.
 - [Source map](SOURCE-MAP.md) — all 16 unique sources, access status, and where each is analyzed.
@@ -66,5 +66,5 @@ See [the idea lab](perpetuals/08-hackathon-idea-lab.md) for the full portfolio, 
 
 - [Autonom Risk OS](perpetuals/11-autonom-rwa-perp-risk-os.md) — corporate-action-aware RWA perps: event-credit funding, risk autopilot, and a Market Integrity Certificate.
 - [Keel](perpetuals/12-keel-agent-trading-runtime.md) — bounded-autonomy runtime for AI trading: Strategy Capsule, Risk Kernel, reconciliation, and Proof of Restraint.
-- [DashX Corridor](stablecoin-payments/01-dashx-cross-border-corridor.md) — programmable stablecoin payouts: multilateral netting, purpose-bound transfers, Compliance Passport, and Proof of Payout.
+- [Passage Corridor](stablecoin-payments/01-passage-cross-border-corridor.md) — programmable stablecoin payouts: multilateral netting, purpose-bound transfers, Compliance Passport, and Proof of Payout.
 - **Parked: x402/MPP API analytics.** The revenue base is still too small and the analytics layer is crowded; revisit if machine-payment volume grows.

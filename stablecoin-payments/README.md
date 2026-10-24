@@ -4,7 +4,7 @@ Cross-border stablecoin settlement and local-rail payouts, with a focus on **Mon
 
 ## Idea
 
-- [01-dashx-cross-border-corridor.md](01-dashx-cross-border-corridor.md) — **DashX Corridor**: a programmable, compliance-aware stablecoin-to-local-rails settlement layer for Monad and ETH, with a Corridor Router, multilateral netting, purpose-bound payouts, Compliance Passport, USDC escrow, liquidity/FX engine, Proof of Payout, and agentic payouts.
+- [01-passage-cross-border-corridor.md](01-passage-cross-border-corridor.md) — **Passage Corridor**: a programmable, compliance-aware stablecoin-to-local-rails settlement layer for Monad and ETH, with a Corridor Router, multilateral netting, purpose-bound payouts, Compliance Passport, USDC escrow, liquidity/FX engine, Proof of Payout, and agentic payouts.
 
 ## Why this topic
 
