@@ -66,5 +66,5 @@ See [the idea lab](perpetuals/08-hackathon-idea-lab.md) for the full portfolio, 
 
 - [Autonom Risk OS](perpetuals/11-autonom-rwa-perp-risk-os.md) — corporate-action-aware RWA perps: event-credit funding, risk autopilot, and a Market Integrity Certificate.
 - [Keel](perpetuals/12-keel-agent-trading-runtime.md) — bounded-autonomy runtime for AI trading: Strategy Capsule, Risk Kernel, reconciliation, and Proof of Restraint.
-- [DashX Corridor](stablecoin-payments/01-dashx-cross-border-corridor.md) — programmable stablecoin payouts: Corridor Router, Compliance Passport, Proof of Payout, and agentic payouts.
-- **Flovia — parked.** The x402/MPP revenue base is still too small and the analytics layer is crowded; revisit if machine-payment volume grows.
+- [DashX Corridor](stablecoin-payments/01-dashx-cross-border-corridor.md) — programmable stablecoin payouts: multilateral netting, purpose-bound transfers, Compliance Passport, and Proof of Payout.
+- **Parked: x402/MPP API analytics.** The revenue base is still too small and the analytics layer is crowded; revisit if machine-payment volume grows.
