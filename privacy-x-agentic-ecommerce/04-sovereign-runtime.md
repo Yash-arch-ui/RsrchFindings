@@ -63,6 +63,14 @@ Most agent wallets are either "trust the model" or "approve every click." Sovere
 
 The demo moment: the agent is "jailbroken" on stage. It tries to drain the wallet. The runtime blocks it, shows the exact policy that fired, and the agent's own logs cannot explain its way out.
 
+## Once-a-decade primitive
+
+Sovereign Runtime becomes a **non-bypassable behavioral automaton for money**. Authorization is a state transition, not a transaction check: the state includes cumulative sequence history, delegation ancestry, revocation epochs, merchant concentration, and task progress. A payment can be individually valid and still be rejected because the sequence is now unsafe.
+
+**Impossible demo:** jailbreak the agent, bypass its SDK, issue raw wallet calls, and send twenty individually valid micropayments across fresh addresses. The external reference monitor blocks the sequence when the behavioral budget is exhausted, while a replayed old state cannot advance the automaton.
+
+The moat is a formally specified policy language compiled into account modules and passkey/HSM boundaries. The product is the state machine and its proof obligations, not another session-key wallet.
+
 ## Sources and what each contributes
 
 | Source | Contribution |
@@ -112,6 +120,7 @@ The demo moment: the agent is "jailbroken" on stage. It tries to drain the walle
 - **Signer compromise.** If the root key or passkey is compromised, the runtime is bypassed. The security claim is about a compromised **agent**, not a compromised signer.
 - **TEE trust.** If TEE attestation is used, the hardware vendor becomes a trust anchor.
 - **Delegation complexity.** Multi-hop delegation and revocation are hard to reason about; a bug can create an escape hatch.
+- **Automaton governance.** A behavioral automaton is only as safe as its state semantics; changing a transition rule is a protocol upgrade, not a configuration tweak.
 - **Privacy leakage.** On-chain policy receipts can reveal spending patterns if not minimized.
 - **Adoption.** Merchants and agent frameworks must integrate the runtime.
 - **No audit.** A hackathon prototype is not a wallet users should trust with real funds.

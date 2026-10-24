@@ -39,6 +39,14 @@ Most privacy tools are a filter on the model's output. ContextCurtain is a **neg
 
 The killer demo: the buyer agent never reveals its max budget, yet the seller agent accepts a price within it because the buyer proves "budget >= 6 MON" without revealing "budget = 8 MON." The deal closes, and the seller cannot extract the extra 2 MON.
 
+## Once-a-decade primitive
+
+ContextCurtain introduces **purpose-bound disclosure leases**. A permitted fact flow is issued as a lease bound to a recipient, purpose, expiry, and settlement context. The commerce protocol accepts the fact only while that lease is valid; reusing a fact for another purpose, recipient, or payment invalidates the proof. This does not pretend that copied plaintext can be erased; it makes authorized use machine-checkable.
+
+**Impossible demo:** the seller probes for the buyer's maximum through five paraphrases while a compromised logistics tool tries to exfiltrate the same fact. The runtime blocks semantic leakage, but accepts a lower-bound proof and closes the deal below the hidden maximum. The privacy control improves the negotiation outcome instead of merely redacting text.
+
+The moat is a trajectory-and-purpose benchmark that measures inferred leakage, not only literal secret strings, and becomes the evaluation standard for private agent negotiation.
+
 ## Sources and what each contributes
 
 | Source | Contribution |
@@ -87,6 +95,7 @@ The killer demo: the buyer agent never reveals its max budget, yet the seller ag
 - **Proof expressiveness.** Not every fact can be turned into a predicate proof; some disclosures are inherently value-revealing.
 - **Latency and cost.** Per-flow classification and proof generation add overhead.
 - **Adaptive adversaries.** The benchmarks are non-adversarial; a strategic seller can probe across turns.
+- **Leases cannot erase plaintext.** A purpose-bound lease can make protocol use rejectable and auditable, but it cannot recall a fact once a malicious recipient has copied it outside the protocol.
 - **Audit privacy.** A private audit trail can hide misconduct; a viewing-key design needs governance.
 - **No cryptographic guarantee.** The gate is a policy engine, not a formal non-interference proof.
 

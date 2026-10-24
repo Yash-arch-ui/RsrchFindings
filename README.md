@@ -9,7 +9,7 @@ Research findings and hackathon ideation for perpetual futures, privacy, Zcash, 
 - [Privacy research](privacy/README.md) — BBS+ anonymous credentials, issuer hiding, revocation, and delegated verifiable presentations.
 - [Privacy x Agentic E-Commerce research](privacy-x-agentic-ecommerce/README.md) — agent payments, AP2 security, MCP spending controls, LLM privacy leakage, and multi-agent commerce.
 - [Zcash privacy research](zcash/README.md) — Halo recursive proofs, Zcash transaction linkability, and the Orchard circuit audit.
-- [Zcash + Monad flagship ideas](IDEAS.md) — ten deep product ideas, each with problem, solution, sources, workflow, demo, cons, and judge Q&A.
+- [Zcash + Monad flagship ideas](IDEAS.md) — ten category-defining product ideas with once-a-decade primitives, impossible-to-fake demos, research sources, workflows, cons, and judge Q&A.
 - [Source map](SOURCE-MAP.md) — all 16 unique sources, access status, and where each is analyzed.
 
 ## Zcash + Monad Hackathons

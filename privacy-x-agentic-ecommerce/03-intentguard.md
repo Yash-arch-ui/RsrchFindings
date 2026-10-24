@@ -39,6 +39,14 @@ Most agent-security demos are a chatbot that says "I won't do that." IntentGuard
 
 The killer demo: a legitimate mandate that pays the wrong merchant, blocked by a context hash mismatch. The audience sees that a valid signature is not enough.
 
+## Once-a-decade primitive
+
+IntentGuard upgrades a context hash into a **causal payment provenance object**. It is a wallet-controlled append-only evidence DAG whose edges record which catalog state, tool output, policy transition, and human-visible rendering caused the final payment. The wallet signs only when the causal graph is complete and every edge is pinned; a final digest without provenance is rejected.
+
+**Impossible demo:** keep the mandate signature valid while changing one upstream tool response. IntentGuard identifies the first divergent causal edge, shows the exact source line and affected policy transition, and blocks before signing. The attack is not merely detected after settlement; its causal explanation is generated before money moves.
+
+The moat is deep MCP/A2A/provider integration plus a continuously expanding adversarial provenance corpus derived from the AP2 threat taxonomy.
+
 ## Sources and what each contributes
 
 | Source | Contribution |
@@ -85,6 +93,7 @@ The killer demo: a legitimate mandate that pays the wrong merchant, blocked by a
 ## Cons and risks
 
 - **Context capture is hard.** Tool outputs, rendered UI, and model memory are messy; a hash only proves what was captured, not what the model "understood."
+- **Causal completeness is harder than hashing.** A provenance DAG can be internally consistent while omitting an unobserved tool, side channel, or human action; the capture boundary must be independently trusted.
 - **Policy expressiveness.** A deterministic policy cannot encode every semantic intent. It can still allow a wrong-but-in-policy payment.
 - **Latency.** Hashing, policy checks, and review escalation add overhead to every payment.
 - **False positives.** Over-blocking frustrates users and encourages them to disable the firewall.

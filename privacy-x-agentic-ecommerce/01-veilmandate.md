@@ -42,6 +42,14 @@ The closest existing products each solve a slice:
 
 VeilMandate is the composition: task-scoped authority + context binding + issuer-hiding credentials + shielded settlement + revocation.
 
+## Once-a-decade primitive
+
+VeilMandate becomes a **fork-resistant task capability**. The mandate is not only a budget and a predicate: it is a hidden one-use task graph. Each merchant choice consumes a private edge in that graph and proves that the call is a valid continuation of the task. Two agents can receive the same mandate, choose different merchants, and produce transcripts that are indistinguishable to an observer, while a payee substitution still fails the continuation proof.
+
+The research moat is a workflow-linkability corpus and an interoperability format for private task graphs. This is more defensible than another BBS+ wallet because it measures whether an entire workflow can be reconstructed, not whether one credential presentation verifies.
+
+**Impossible demo:** run two agents with the same mandate, swap their merchant order and execution sequence, then ask a chain analyst which calls belong together. The analyst cannot answer. Immediately mutate one upstream quote so the payment is wrong; the fork proof fails before signing. Privacy and intent integrity survive the same adaptive workflow.
+
 ## Sources and what each contributes
 
 | Source | What it gives VeilMandate |
@@ -93,6 +101,7 @@ VeilMandate is the composition: task-scoped authority + context binding + issuer
 - **Revocation privacy.** Status credentials introduce linkability between the credential and its status check. The design must state when this link is visible.
 - **Merchant adoption.** Merchants must verify BBS+ presentations and shielded payments; that is a new integration.
 - **Agent compromise.** A compromised agent can spend within the mandate. The mandate limits loss, not intent.
+- **Graph indistinguishability is hard.** Hiding task-graph edges while proving valid continuation requires careful nullifier design; a naive graph encoding recreates the workflow leak.
 - **No audit.** The BBS+ and Zcash integration would be a hackathon prototype, not production cryptography.
 
 ## Judge Q&A

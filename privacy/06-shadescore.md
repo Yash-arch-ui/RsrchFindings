@@ -43,6 +43,14 @@ Most privacy-preserving credit systems prove a score. ShadeScore proves the **pr
 
 The demo: an agent with no public history gets a loan because it proves "0 defaults, 18 months, volume >= 100k" without revealing a single counterparty. A competitor scraping the chain learns nothing.
 
+## Once-a-decade primitive
+
+ShadeScore becomes a **query-private, non-reconstructible underwriting protocol**. The lender commits to the predicate it wants tested; the agent does not receive the exact threshold, and a single-use query capsule prevents a lender or colluding lenders from combining hundreds of yes/no answers into an approximate private history. The result is a proof of eligibility, not a portable score that becomes a new surveillance identifier.
+
+**Impossible demo:** two colluding lenders ask complementary thresholds about volume, repayment time, and reserves. Neither can reconstruct the agent's exact values; a fabricated auditor credential is later opened and attributed without exposing honest borrowers. Credit becomes selectively verifiable without becoming a public dossier.
+
+The moat is a governed federation of issuers with long-lived repayment attestations, query-rate governance, and accountable opening. The difficult asset is trusted historical coverage, not proof plumbing.
+
 ## Sources and what each contributes
 
 | Source | Contribution |
@@ -91,6 +99,7 @@ The demo: an agent with no public history gets a loan because it proves "0 defau
 - **Issuer trust.** The auditor can lie. Accountable issuer hiding catches some fraud, but the governance/opening authority is a trust anchor.
 - **Predicate leakage.** A predicate can still leak information (e.g., "volume >= 100k" narrows the range). The query set must be designed carefully.
 - **Correlation across queries.** A lender can ask many predicates and reconstruct a profile. Rate limits and query privacy are needed.
+- **Hidden predicates reduce usability.** A lender may need to prove that its private query was legitimate without revealing underwriting strategy; query capsules require governance and careful recovery paths.
 - **Revocation linkability.** Status checks can link the agent to the issuer or the status epoch.
 - **Credit risk.** The system proves facts, not future ability to repay. A private score can still be wrong.
 - **Regulatory.** Lending/KYC/AML requirements may force disclosure; the design needs a compliance path.

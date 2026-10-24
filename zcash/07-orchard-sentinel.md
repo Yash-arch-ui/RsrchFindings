@@ -44,6 +44,14 @@ The Orchard audit is one of the first serious attempts to formally verify a prod
 
 The demo moment: introduce a one-line change to a Halo2 gadget. Sentinel's CI fails, shows the exact constraint that lost its binding, and produces a counterexample witness. Then revert the change and watch the proof pass.
 
+## Once-a-decade primitive
+
+Orchard Sentinel issues **translation-validation certificates for circuits**. CI proves not merely that an abstract Clean/Lean model is sound, but that the model was mechanically extracted from the exact Rust/Halo2 constraint system shipped in the commit. The certificate pins the source hash, normalized IR, proof artifact, test corpus, and known exclusions; wallets and protocols can reject uncertified circuit builds.
+
+**Impossible demo:** change one selector or permit an empty Sinsemilla message. Sentinel points to the exact source line, produces a counterexample witness, and invalidates the certificate. Revert the line and the proof becomes valid again. It is a proof that the proof is about the code actually shipped.
+
+The moat is a canonical Orchard/Halo2 regression corpus plus source maps and machine-verifiable certificates that become an ecosystem release requirement.
+
 ## Sources and what each contributes
 
 | Source | Contribution |
@@ -90,6 +98,7 @@ The demo moment: introduce a one-line change to a Halo2 gadget. Sentinel's CI fa
 - **Halo2 diversity.** Circuits use different gadgets, custom gates, and layouts; a generic extractor is difficult.
 - **Proof engineering.** Lean/Clean proofs require expertise; the tool may only cover a subset.
 - **False confidence.** A certificate can be over-read as "fully verified" when it covers only the extracted model.
+- **Compiler trust moves upward.** The extractor, IR normalizer, and translation validator become security-critical; a bug there can certify the wrong circuit.
 - **Maintenance.** Zcash/Halo2 APIs change; the extractor and proofs must track them.
 - **No production audit.** The tool itself needs review.
 

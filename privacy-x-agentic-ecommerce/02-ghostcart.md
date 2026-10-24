@@ -31,6 +31,14 @@ Most private payment demos hide the payment. GhostCart hides the **market**: who
 
 It also fixes a subtle agentic-commerce failure: a cheap payment is not a delivered service. GhostCart binds the payment, the bid, and the delivery proof into one receipt chain.
 
+## Once-a-decade primitive
+
+GhostCart introduces **delivery-contingent private clearing**. A winning bid is not merely escrowed; it becomes spendable only when a cryptographic delivery artifact matches the committed RFQ, quality constraints, and winning bid. The buyer cannot inspect losing bids, the merchant cannot adapt after seeing competitors, and a false delivery artifact cannot release the funds.
+
+**Impossible demo:** let a merchant observe a leaked early bid and submit a strategic undercut; the sealed clearing rejects the late information. Then let the winner deliver altered goods; the response artifact fails the RFQ commitment and the shielded escrow does not release. The same product prevents both market manipulation and false fulfillment.
+
+The moat is a threshold clearing network with portable merchant eligibility and delivery attestations. Its value compounds through verified procurement history without publishing the bid book.
+
 ## Sources and what each contributes
 
 | Source | Contribution |
@@ -80,6 +88,7 @@ It also fixes a subtle agentic-commerce failure: a cheap payment is not a delive
 - **Merchant adoption.** Sealed-bid procurement is unfamiliar; merchants may prefer transparent RFQs.
 - **Regulatory constraints.** Public procurement often requires transparency and auditability. GhostCart needs a selective-disclosure audit path.
 - **Delivery disputes.** The attestation is only as good as the evaluator. A bonded evaluator or multi-sig delivery proof is needed.
+- **Artifact semantics.** A cryptographic delivery artifact can prove that a committed object was delivered, not that the object is socially useful; evaluators and schemas remain critical.
 - **Zcash boundary leakage.** Note splitting and batching reduce but do not eliminate timing/linkability.
 - **Complex UX.** The buyer agent must manage escrow, deadlines, and dispute windows.
 - **No production audit.** The protocol is a hackathon prototype.

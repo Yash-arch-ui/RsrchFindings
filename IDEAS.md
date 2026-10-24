@@ -19,6 +19,33 @@ Ten hackathon ideas built from the 16-source research set. Each file contains th
 | 9 | [Halo Mandate](zcash/09-halo-mandate.md) | Zcash + Monad | One recursive proof of an agent's entire authority and payment history | Halo, Orchard audit, MinMandate, BBS+, issuer hiding, Zcash linkability |
 | 10 | [Veil402](privacy-x-agentic-ecommerce/10-veil402.md) | Monad + Zcash | Private pay-per-use APIs with sealed quotes, shielded batches, and delivery receipts | A2A SoK, MinMandate, Cloaked, AESP, TIVA, AP2, Zcash linkability |
 
+## Once-a-decade thesis
+
+The slate is not ten privacy apps. It is **evidence-carrying private machine commerce**.
+
+Every agent action should produce three composable answers without creating a surveillance graph:
+
+1. **Why was it authorized?** IntentGuard, Sovereign Runtime, VeilMandate, and Halo Mandate carry causal authority and state transitions.
+2. **What was it allowed to reveal?** ContextCurtain, ShadeScore, and Boundary Radar make purpose, issuer, and boundary leakage explicit.
+3. **What was actually delivered?** GhostCart and Veil402 bind service artifacts to settlement instead of treating payment finality as delivery.
+
+Zcash hides the economic graph. Halo2 makes long histories compressible. BBS+ makes authority selective. The once-a-decade element is the composition: **machines become accountable through proofs without becoming surveillable through logs**.
+
+## Category-defining primitives
+
+| Idea | Primitive that makes it non-generic | Impossible-to-fake moment |
+|---|---|---|
+| VeilMandate | Fork-resistant private task graph | Two agents' merchant workflows become indistinguishable, while a payee fork fails before signing |
+| GhostCart | Delivery-contingent private clearing | Strategic undercut and false delivery both fail in one procurement round |
+| IntentGuard | Causal payment provenance DAG | A valid mandate is blocked and the first poisoned upstream edge is identified |
+| Sovereign Runtime | Non-bypassable behavioral automaton | Twenty individually valid micropayments fail when the sequence becomes unsafe |
+| ContextCurtain | Purpose-bound disclosure leases | Five semantic probes and a compromised tool fail to extract the hidden maximum |
+| Veil402 | Response-conditioned micropayments | A subtly corrupted API response cannot unlock payment, even inside a valid batch |
+| ShadeScore | Query-private non-reconstructible underwriting | Colluding lenders cannot triangulate exact private financial values |
+| Orchard Sentinel | Source-to-circuit translation certificates | One selector edit invalidates the formal certificate and emits a witness |
+| Boundary Radar | Local adversarial privacy compiler | The wallet synthesizes a lower-linkability transaction plan before signing |
+| Halo Mandate | State-carrying authority accumulator | A revoked branch remains auditable but cannot advance the recursive state |
+
 ## Recommended portfolio
 
 **Clean-sweep play:** build **VeilMandate** as the flagship, with **IntentGuard** as the visible security layer and **Boundary Radar** as the privacy proof. Add **Orchard Sentinel** if the team wants a Zcash-native developer-tool track. Add **ContextCurtain** if the demo needs a multi-agent "wow" moment.

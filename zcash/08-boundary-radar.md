@@ -53,6 +53,14 @@ Most privacy wallets show a balance and a "shielded" badge. Boundary Radar shows
 
 The demo: a user withdraws exactly 1.0 ZEC to an exchange. Boundary Radar flags an 87% link to a shielded payroll, shows the matching deposit, and proposes a split into 0.63 + 0.37 with a 40-minute delay. The link disappears.
 
+## Once-a-decade primitive
+
+Boundary Radar becomes a **local adversarial privacy compiler**, not a scorecard. It simulates candidate transactions against chain-wide matching strategies, known-address clusters, timing models, and the user's constraints, then synthesizes the lowest-linkability feasible plan. The analysis stays local; the wallet receives a proof-like explanation of why the chosen plan is safer.
+
+**Impossible demo:** a 1.0 ZEC withdrawal is linked using the documented exact-amount heuristic. Radar generates several feasible alternatives, shows the analyst posterior collapse, and refuses the original round trip. The user sees the attack, the compiler's alternatives, and the cost of each mitigation before signing.
+
+The moat is an Orchard-era adversary model and PCZT integration that improves through public transaction-pattern evaluations without collecting user histories.
+
 ## Sources and what each contributes
 
 | Source | Contribution |
@@ -99,6 +107,7 @@ The demo: a user withdraws exactly 1.0 ZEC to an exchange. Boundary Radar flags 
 - **Local data limits.** The wallet sees only its own history; chain-wide clusters require external data, which raises privacy concerns.
 - **Behavioral burden.** Splitting and delaying payments is annoying; users may ignore the lint.
 - **Adversary adaptation.** An analyst with more data can beat the heuristic; the score is not a guarantee.
+- **Compiler false positives.** A counterfactual plan may reduce the modeled attack while creating a new operational fingerprint; every recommendation needs a reason and a residual-risk report.
 - **Regulatory pressure.** Exchanges may require exact amounts and destination addresses, reducing mitigation options.
 - **No formal privacy model.** The tool improves hygiene, not cryptographic privacy.
 - **Zcash protocol changes.** The heuristic is based on 2017 Sprout; modern Orchard behavior differs. The tool must be recalibrated.

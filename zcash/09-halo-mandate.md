@@ -37,6 +37,14 @@ Agent authority is usually a document or a token. Halo Mandate makes it a **recu
 
 The demo: an agent presents one proof to a merchant. The merchant verifies it in milliseconds. Behind that proof are 40 payments, 3 sub-delegations, a revocation check, and a budget proof. The merchant sees only "authorized, 2 ZEC, food service."
 
+## Once-a-decade primitive
+
+Halo Mandate becomes a **state-carrying authority accumulator**. Each recursive step certifies the next valid authority/payment state, hidden delegation lineage, fresh nullifier, remaining budget, and revocation epoch. It is not merely a compressed bundle of receipts: the next payment must consume the previous state, so a revoked branch remains historically valid but cannot advance.
+
+**Impossible demo:** compress 40 payments, three sub-delegations, and a midstream revocation into one proof. The old state verifies for audit, but the next payment fails without exposing which branch was revoked or revealing the payment history. A merchant receives one predicate proof, not a dossier.
+
+The moat is the curve/circuit bridge between BBS+ semantics and Halo2 recursion, packaged as a reusable authority-proof standard for wallets, merchants, and shielded applications.
+
 ## Sources and what each contributes
 
 | Source | Contribution |
@@ -87,6 +95,7 @@ The demo: an agent presents one proof to a merchant. The merchant verifies it in
 - **Proving cost.** Recursive proving is expensive on a laptop; a hackathon demo may use a small circuit or a precomputed proof.
 - **Verifier work.** Halo is recursive but not fully succinct; verification is linear in circuit size. The claim must be "constant in history," not "constant time for arbitrary computation."
 - **Credential integration.** BBS+ and Halo2 use different curves/assumptions; a composed proof may need a bridge or a custom circuit.
+- **State-carrying recursion is unforgiving.** A single incorrect budget, epoch, or nullifier transition can invalidate the entire next state; the circuit needs differential tests before any performance claim.
 - **Revocation freshness.** The status check must be recent; a stale proof can authorize a revoked agent.
 - **No audit.** The composition is a prototype.
 
